@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useProductStore } from '@/stores/product'
-import dummyData from '@/assets/dummy-data.json'
+import { useCategoriesStore } from '@/stores/category'
+import CategoryForm from './CategoryForm.vue'
 import type { Category } from '@/types'
 
+const categoryStore = useCategoriesStore()
 const store = useProductStore()
 const tags = [
   'Electronics',
@@ -28,6 +30,13 @@ function itemProps(item: Category): { title: string; subtitle: string } {
     subtitle: item.description || 'No description available',
   }
 }
+
+function handleFetchCategories(): void {
+  if (categoryStore.list.length === 0) {
+    categoryStore.fetchCategories()
+  }
+}
+const popupCategory = ref(false)
 
 const fileUploaded = ref<File | null>(null)
 const objUrl = ref<string>('')
@@ -113,12 +122,24 @@ async function handleFileUpload(file: File | File[]): Promise<void> {
 
         <v-select
           v-model="store.product.categoryId"
+          @update:focused="handleFetchCategories"
           item-title="name"
           item-value="id"
           :item-props="itemProps"
-          :items="dummyData.categories"
+          :loading="categoryStore.loading"
+          :items="categoryStore.list"
           label="Category"
-        ></v-select>
+        >
+          <template #append>
+            <v-btn
+              icon="mdi-plus"
+              :disabled="categoryStore.loading"
+              size="md"
+              @click="popupCategory = true"
+            >
+            </v-btn>
+          </template>
+        </v-select>
 
         <v-switch
           v-model="store.product.isActive"
@@ -167,5 +188,11 @@ async function handleFileUpload(file: File | File[]): Promise<void> {
         </v-btn>
       </v-form>
     </v-card>
+
+    <v-dialog v-model="popupCategory" width="auto">
+      <v-card max-width="400" prepend-icon="mdi-plus" title="Create Category">
+        <CategoryForm @submit="popupCategory = false" />
+      </v-card>
+    </v-dialog>
   </v-sheet>
 </template>
