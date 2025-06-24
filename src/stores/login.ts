@@ -17,19 +17,19 @@ export const useLoginStore = defineStore('login', () => {
       loading.value = true
       const res = await handleLogin(login)
       data.value = mapResponse(res)
-    } catch (error) {
+    } catch (error: unknown) {
       error.value = error
     } finally {
       loading.value = false
     }
   }
 
-  return { login, valid, loading, error, handleSubmit }
+  return { login, data, valid, loading, error, handleSubmit }
 })
 
-function mapResponse(data): LoginResponse {
+function mapResponse(data: unknown): LoginResponse {
   return {
-    token: data.token,
+    token: data?.token,
   }
 }
 

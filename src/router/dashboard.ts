@@ -25,3 +25,18 @@ export default [
     ],
   },
 ]
+// {
+//   path: '',
+//   name: 'list-product',
+//   component: () => import('@/pages/products/ListPage.vue'),
+// },
+// {
+//   path: 'create',
+//   name: 'create-product',
+//   component: () => import('@/pages/products/CreatePage.vue'),
+// },
+// {
+//   path: 'edit/:id',
+//   name: 'edit-product',
+//   component: () => import('@/pages/products/EditPage.vue'),
+// },
