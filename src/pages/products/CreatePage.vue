@@ -2,6 +2,6 @@
 import ProductForm from '@/components/forms/ProductForm.vue'
 </script>
 <template>
-  <h1>Create Product Page</h1>
+  <h1 class="my-10 ml-6">Create Product</h1>
   <ProductForm />
 </template>
