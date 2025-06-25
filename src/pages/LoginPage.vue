@@ -4,6 +4,7 @@ import LoginForm from '@/components/forms/LoginForm.vue'
 
 <template>
   <div style="padding-top: 200px">
+    <div class="text-center mb-6 text-h4"><v-icon icon="mdi-volleyball" /> GY Group</div>
     <LoginForm />
   </div>
 </template>

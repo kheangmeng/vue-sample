@@ -69,78 +69,8 @@ async function handleFileUpload(file: File | File[]): Promise<void> {
               label="Product Name"
               clearable
               variant="outlined"
+              density="compact"
             ></v-text-field>
-          </v-col>
-
-          <v-col cols="12" sm="6">
-            <v-textarea
-              label="Description"
-              v-model="store.product.description"
-              :rules="[required]"
-              name="input-7-1"
-              auto-grow
-              variant="outlined"
-            ></v-textarea>
-          </v-col>
-
-          <v-col cols="12" sm="6">
-            <v-text-field
-              v-model="store.product.brand"
-              :readonly="store.loading"
-              label="Brand"
-              clearable
-              variant="outlined"
-            ></v-text-field>
-          </v-col>
-
-          <v-col cols="12" sm="6">
-            <v-text-field
-              v-model="store.product.sku"
-              :readonly="store.loading"
-              label="SKU"
-              clearable
-              variant="outlined"
-            ></v-text-field>
-          </v-col>
-
-          <v-col cols="12" sm="6">
-            <v-text-field
-              v-model="store.product.basePrice"
-              label="Base Price"
-              prefix="$"
-              variant="outlined"
-            ></v-text-field>
-          </v-col>
-
-          <v-col cols="12" sm="6">
-            <v-combobox
-              v-model="store.product.tags"
-              :items="tags"
-              label="Tags"
-              chips
-              multiple
-              variant="outlined"
-            ></v-combobox>
-          </v-col>
-
-          <v-col cols="12" sm="6">
-            <v-number-input
-              v-model="store.product.stockQuantity"
-              control-variant="stacked"
-              label="Stock Quantity"
-              :min="0"
-              variant="outlined"
-            ></v-number-input>
-          </v-col>
-
-          <v-col cols="12" sm="6">
-            <v-number-input
-              v-model="store.product.lowStockThreshold"
-              control-variant="stacked"
-              label="Low Stock Threshold"
-              :min="0"
-              variant="outlined"
-            ></v-number-input>
           </v-col>
 
           <v-col cols="12" sm="6">
@@ -154,12 +84,14 @@ async function handleFileUpload(file: File | File[]): Promise<void> {
               :items="categoryStore.list"
               label="Category"
               variant="outlined"
+              density="compact"
             >
               <template #append>
                 <v-btn
                   icon="mdi-plus"
                   :disabled="categoryStore.loading"
                   size="md"
+                  density="compact"
                   @click="popupCategory = true"
                 >
                 </v-btn>
@@ -167,26 +99,101 @@ async function handleFileUpload(file: File | File[]): Promise<void> {
             </v-select>
           </v-col>
 
+          <v-col cols="12" sm="6">
+            <v-text-field
+              v-model="store.product.brand"
+              :readonly="store.loading"
+              label="Brand"
+              clearable
+              variant="outlined"
+              density="compact"
+            ></v-text-field>
+          </v-col>
+
+          <v-col cols="12" sm="6">
+            <v-text-field
+              v-model="store.product.sku"
+              :readonly="store.loading"
+              label="SKU"
+              clearable
+              variant="outlined"
+              density="compact"
+            ></v-text-field>
+          </v-col>
+
+          <v-col cols="12" sm="6">
+            <v-text-field
+              v-model="store.product.basePrice"
+              label="Base Price"
+              prefix="$"
+              variant="outlined"
+              density="compact"
+            ></v-text-field>
+          </v-col>
+
+          <v-col cols="12" sm="6">
+            <v-combobox
+              v-model="store.product.tags"
+              :items="tags"
+              label="Tags"
+              chips
+              multiple
+              variant="outlined"
+              density="compact"
+            ></v-combobox>
+          </v-col>
+
+          <v-col cols="12" sm="6">
+            <v-number-input
+              v-model="store.product.stockQuantity"
+              control-variant="stacked"
+              label="Stock Quantity"
+              :min="0"
+              variant="outlined"
+              density="compact"
+            ></v-number-input>
+          </v-col>
+
+          <v-col cols="12" sm="6">
+            <v-number-input
+              v-model="store.product.lowStockThreshold"
+              control-variant="stacked"
+              label="Low Stock Threshold"
+              :min="0"
+              variant="outlined"
+              density="compact"
+            ></v-number-input>
+          </v-col>
+
+          <v-col cols="12">
+            <v-textarea
+              label="Description"
+              v-model="store.product.description"
+              :rules="[required]"
+              name="input-7-1"
+              auto-grow
+              variant="outlined"
+              density="compact"
+            ></v-textarea>
+          </v-col>
+
           <v-col cols="12">
             <v-switch
               v-model="store.product.isActive"
               :label="`${store.product.isActive ? 'Active' : 'Inactive'}`"
               hide-details
-              inset
               color="primary"
             ></v-switch>
             <v-switch
               v-model="store.product.isSellable"
               :label="`${store.product.isSellable ? 'Sellable' : 'Not Sellable'}`"
               hide-details
-              inset
               color="primary"
             ></v-switch>
             <v-switch
               v-model="store.product.taxExempt"
               :label="`Tax exempt: ${store.product.taxExempt ? 'Yes' : 'No'}`"
               hide-details
-              inset
               color="primary"
             ></v-switch>
           </v-col>
@@ -197,6 +204,7 @@ async function handleFileUpload(file: File | File[]): Promise<void> {
               label="Image"
               prepend-icon="mdi-image"
               variant="outlined"
+              density="compact"
             ></v-file-input>
             <v-img :width="300" aspect-ratio="16/9" cover :src="objUrl"></v-img>
           </v-col>
@@ -206,7 +214,7 @@ async function handleFileUpload(file: File | File[]): Promise<void> {
         <v-btn
           :disabled="!store.valid"
           :loading="store.loading"
-          color="success"
+          color="primary"
           size="large"
           type="submit"
           variant="elevated"
