@@ -13,7 +13,9 @@ function handleLogout(): void {
 <template>
   <v-layout class="rounded rounded-md border">
     <v-app-bar :elevation="2">
-      <v-app-bar-title><v-icon icon="mdi-volleyball" /> GY Group</v-app-bar-title>
+      <v-app-bar-title @click="$router.push('/')" class="cursor-pointer">
+        <v-icon icon="mdi-volleyball" /> GY Group
+      </v-app-bar-title>
 
       <v-btn icon color="red" variant="tonal" class="mr-2" @click="handleLogout">
         <v-icon icon="mdi-logout" />

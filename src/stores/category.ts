@@ -1,7 +1,7 @@
 import { ref, reactive } from 'vue'
 import { defineStore } from 'pinia'
+import { handleCreate, fetchList } from '@/api/categoryApi'
 import type { Category, CategoryResponse } from '@/types'
-import dummyData from '@/assets/dummy-data.json'
 
 export const useCategoryStore = defineStore('category', () => {
   const categories = useCategoriesStore()
@@ -56,31 +56,3 @@ export const useCategoriesStore = defineStore('categories', () => {
 
   return { data, loading, error, fetchCategories }
 })
-
-function fetchList() {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve({
-        data: dummyData.categories,
-        status: 'success',
-        code: 200,
-      })
-    }, 1000)
-  })
-}
-
-function handleCreate(category: Category) {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      if (category.name) {
-        resolve({
-          message: 'Category created successfully',
-          status: 'success',
-          code: 201,
-        })
-      } else {
-        reject('Something went wrong.')
-      }
-    }, 1000)
-  })
-}

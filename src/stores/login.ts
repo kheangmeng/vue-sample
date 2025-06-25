@@ -3,6 +3,7 @@ import { useRouter } from 'vue-router'
 import { defineStore } from 'pinia'
 import type { Login, LoginResponse } from '@/types'
 import { useAuthStore } from '@/stores/auth'
+import { handleLogin, mapResponse } from '@/api/authApi'
 
 export const useLoginStore = defineStore('login', () => {
   const router = useRouter()
@@ -32,24 +33,3 @@ export const useLoginStore = defineStore('login', () => {
 
   return { login, data, valid, loading, error, handleSubmit }
 })
-
-function mapResponse(data: unknown): LoginResponse {
-  return {
-    token: data?.token,
-  }
-}
-
-function handleLogin(login: Login) {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      if (login.email === 'vue.sample@gmail.com' && login.password === 'secret') {
-        resolve({
-          message: 'login success',
-          token: 'token123',
-        })
-      } else {
-        reject('Invalid email or password.')
-      }
-    }, 1000)
-  })
-}

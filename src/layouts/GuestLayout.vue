@@ -4,7 +4,9 @@ const icons = ['mdi-facebook', 'mdi-twitter', 'mdi-linkedin', 'mdi-instagram']
 <template>
   <v-layout class="rounded rounded-md border">
     <v-app-bar>
-      <v-app-bar-title><v-icon icon="mdi-volleyball" /> GY Group</v-app-bar-title>
+      <v-app-bar-title @click="$router.push('/')" class="cursor-pointer">
+        <v-icon icon="mdi-volleyball" /> GY Group
+      </v-app-bar-title>
 
       <v-btn
         append-icon="mdi-login"
