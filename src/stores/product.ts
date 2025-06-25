@@ -1,6 +1,7 @@
 import { ref, reactive } from 'vue'
 import { defineStore } from 'pinia'
-import type { Product, CreateResponse } from '@/types'
+import dummyData from '@/assets/dummy-data.json'
+import type { Product, ProductResponse, CreateResponse } from '@/types'
 
 export const useProductStore = defineStore('product', () => {
   const product = reactive<Product>({
@@ -54,6 +55,38 @@ function handleCreate(product: Product) {
       } else {
         reject('Something went wrong.')
       }
+    }, 1000)
+  })
+}
+
+export const useProductsStore = defineStore('products', () => {
+  const data = ref<ProductResponse[]>([])
+  const loading = ref(false)
+  const error = ref()
+
+  async function fetchProducts(): Promise<void> {
+    try {
+      loading.value = true
+      const res = (await fetchList()) as { data: ProductResponse[] }
+      data.value = res.data
+    } catch (error: unknown) {
+      error.value = error
+    } finally {
+      loading.value = false
+    }
+  }
+
+  return { data, loading, error, fetchProducts }
+})
+
+function fetchList() {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve({
+        data: dummyData.products,
+        status: 'success',
+        code: 200,
+      })
     }, 1000)
   })
 }

@@ -225,8 +225,8 @@ async function handleFileUpload(file: File | File[]): Promise<void> {
     </v-form>
   </v-card>
 
-  <v-dialog v-model="popupCategory" width="auto">
-    <v-card max-width="400" prepend-icon="mdi-plus" title="Create Category">
+  <v-dialog v-model="popupCategory" max-width="500">
+    <v-card prepend-icon="mdi-shape" title="Create Category" class="px-6 pb-6">
       <CategoryForm @submit="popupCategory = false" />
     </v-card>
   </v-dialog>

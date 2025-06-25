@@ -9,8 +9,6 @@ export interface Product {
   tags?: string[]
   isActive: boolean
   isSellable: boolean
-  createdAt: string
-  updatedAt: string
   imageUrl?: string
   taxExempt: boolean
   basePrice?: number
@@ -18,6 +16,8 @@ export interface Product {
   barcode?: string
   stockQuantity?: number
   lowStockThreshold?: number
+  createdAt: string
+  updatedAt: string
 }
 
 export interface ProductResponse {
@@ -30,8 +30,6 @@ export interface ProductResponse {
   tags?: string[]
   isActive: boolean
   isSellable: boolean
-  createdAt: string
-  updatedAt: string
   imageUrl?: string
   taxExempt: boolean
   basePrice?: number
@@ -39,4 +37,6 @@ export interface ProductResponse {
   barcode?: string
   stockQuantity?: number
   lowStockThreshold?: number
+  createdAt: string
+  updatedAt: string
 }
