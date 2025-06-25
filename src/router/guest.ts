@@ -1,3 +1,4 @@
+import GuestLayout from '@/layouts/GuestLayout.vue'
 import HomePage from '@/pages/HomePage.vue'
 import AboutPage from '@/pages/AboutPage.vue'
 import LoginPage from '@/pages/LoginPage.vue'
@@ -5,18 +6,25 @@ import LoginPage from '@/pages/LoginPage.vue'
 export default [
   {
     path: '/',
-    name: 'home',
-    component: HomePage,
-  },
-  {
-    path: '/about',
-    name: 'about',
-    component: AboutPage,
-  },
-  {
-    path: '/login',
-    name: 'login',
-    component: LoginPage,
+    name: 'guest',
+    component: GuestLayout,
+    children: [
+      {
+        path: '/',
+        name: 'home',
+        component: HomePage,
+      },
+      {
+        path: '/about',
+        name: 'about',
+        component: AboutPage,
+      },
+      {
+        path: '/login',
+        name: 'login',
+        component: LoginPage,
+      },
+    ],
   },
 ]
 // {
