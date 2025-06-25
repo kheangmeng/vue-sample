@@ -1,6 +1,6 @@
 # vue-sample
 
-This template should help get you started developing with Vue 3 in Vite.
+This boilerplate repository is solely designed for basic show casting, and in production, it will undergo more significant changes.
 
 ## Recommended IDE Setup
 

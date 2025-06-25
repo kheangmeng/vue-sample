@@ -70,6 +70,7 @@ function required(v: string): string | boolean {
         size="large"
         variant="tonal"
         block
+        type="submit"
       >
         Log In
       </v-btn>

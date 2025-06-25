@@ -32,7 +32,7 @@ function itemProps(item: Category): { title: string; subtitle: string } {
 }
 
 function handleFetchCategories(): void {
-  if (categoryStore.list.length === 0) {
+  if (categoryStore.data.length === 0) {
     categoryStore.fetchCategories()
   }
 }
@@ -81,7 +81,7 @@ async function handleFileUpload(file: File | File[]): Promise<void> {
               item-value="id"
               :item-props="itemProps"
               :loading="categoryStore.loading"
-              :items="categoryStore.list"
+              :items="categoryStore.data"
               label="Category"
               variant="outlined"
               density="compact"

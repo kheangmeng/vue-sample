@@ -7,6 +7,9 @@ export default [
   {
     path: '/products',
     name: 'products',
+    meta: {
+      requiresAuth: true,
+    },
     component: DashboardLayout,
     children: [
       {

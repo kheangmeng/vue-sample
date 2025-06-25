@@ -23,7 +23,7 @@ export const useCategoryStore = defineStore('category', () => {
       loading.value = true
       const res = (await handleCreate(category)) as CategoryResponse
       data.value = res
-      categories.list.push({
+      categories.data.push({
         ...category,
         id: Math.round(Math.random() * 1000000),
       })
@@ -38,7 +38,7 @@ export const useCategoryStore = defineStore('category', () => {
 })
 
 export const useCategoriesStore = defineStore('categories', () => {
-  const list = ref<CategoryResponse[]>([])
+  const data = ref<CategoryResponse[]>([])
   const loading = ref(false)
   const error = ref()
 
@@ -46,7 +46,7 @@ export const useCategoriesStore = defineStore('categories', () => {
     try {
       loading.value = true
       const res = (await fetchList()) as { data: CategoryResponse[] }
-      list.value = res.data
+      data.value = res.data
     } catch (error: unknown) {
       error.value = error
     } finally {
@@ -54,7 +54,7 @@ export const useCategoriesStore = defineStore('categories', () => {
     }
   }
 
-  return { list, loading, error, fetchCategories }
+  return { data, loading, error, fetchCategories }
 })
 
 function fetchList() {

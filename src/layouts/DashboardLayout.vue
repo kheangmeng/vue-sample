@@ -1,7 +1,23 @@
+<script setup lang="ts">
+import { useRouter } from 'vue-router'
+import { useAuthStore } from '@/stores/auth'
+
+const router = useRouter()
+const authStore = useAuthStore()
+function handleLogout(): void {
+  authStore.setAuthenticated(false)
+  router.push('/login')
+}
+</script>
+
 <template>
   <v-layout class="rounded rounded-md border">
     <v-app-bar :elevation="2">
       <v-app-bar-title><v-icon icon="mdi-volleyball" /> GY Group</v-app-bar-title>
+
+      <v-btn icon color="red" variant="tonal" class="mr-2" @click="handleLogout">
+        <v-icon icon="mdi-logout" />
+      </v-btn>
     </v-app-bar>
 
     <v-navigation-drawer>
