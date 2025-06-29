@@ -14,12 +14,14 @@ export const useCategoryStore = defineStore('category', () => {
     parentCategoryId: undefined,
   })
   const data = ref<CategoryResponse>()
+  const status = ref<'idle' | 'submitting' | 'finished'>('idle')
   const valid = ref(false)
   const loading = ref(false)
   const error = ref()
 
   async function handleSubmit(): Promise<void> {
     try {
+      status.value = 'submitting'
       loading.value = true
       const res = await handleCreateCategory(category)
       data.value = res.category
@@ -30,11 +32,12 @@ export const useCategoryStore = defineStore('category', () => {
     } catch (error: unknown) {
       error.value = error
     } finally {
+      status.value = 'finished'
       loading.value = false
     }
   }
 
-  return { category, data, valid, loading, error, handleSubmit }
+  return { category, data, valid, loading, status, error, handleSubmit }
 })
 
 export const useCategoriesStore = defineStore('categories', () => {

@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import { useProductStore } from '@/stores/product'
 import { useCategoriesStore } from '@/stores/category'
 import CategoryForm from './CategoryForm.vue'
 import type { Category } from '@/types'
 
+const router = useRouter()
 const categoryStore = useCategoriesStore()
 const store = useProductStore()
 const tags = [
@@ -16,9 +18,12 @@ const tags = [
   'Sports & Outdoors',
 ]
 
-function onSubmit(): void {
+async function onSubmit(): Promise<void> {
   if (!store.valid) return
-  store.handleSubmit()
+  await store.handleSubmit()
+  if (store.status === 'finished') {
+    router.push('/products')
+  }
 }
 function required(v: string): string | boolean {
   return !!v || 'Field is required'

@@ -12,6 +12,7 @@ export const useLoginStore = defineStore('login', () => {
     password: '',
   })
   const authStore = useAuthStore()
+  const status = ref<'idle' | 'submitting' | 'finished'>('idle')
   const data = ref<LoginResponse>()
   const valid = ref(false)
   const loading = ref(false)
@@ -19,6 +20,7 @@ export const useLoginStore = defineStore('login', () => {
 
   async function handleSubmit() {
     try {
+      status.value = 'submitting'
       loading.value = true
       const res = await handleLogin(login)
       data.value = mapResponse(res)
@@ -27,9 +29,10 @@ export const useLoginStore = defineStore('login', () => {
     } catch (error: unknown) {
       error.value = error
     } finally {
+      status.value = 'finished'
       loading.value = false
     }
   }
 
-  return { login, data, valid, loading, error, handleSubmit }
+  return { login, data, valid, loading, status, error, handleSubmit }
 })
