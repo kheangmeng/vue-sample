@@ -1,7 +1,7 @@
 import { ref, reactive } from 'vue'
 import { defineStore } from 'pinia'
-import { handleCreate, fetchList } from '@/api/categoryApi'
-import type { Category, CategoryResponse } from '@/types'
+import { handleCreateCategory, handleFetchCategories } from '@/api/categoryApi'
+import type { Category, CategoryResponse, Pagination } from '@/types'
 
 export const useCategoryStore = defineStore('category', () => {
   const categories = useCategoriesStore()
@@ -21,8 +21,8 @@ export const useCategoryStore = defineStore('category', () => {
   async function handleSubmit(): Promise<void> {
     try {
       loading.value = true
-      const res = (await handleCreate(category)) as CategoryResponse
-      data.value = res
+      const res = await handleCreateCategory(category)
+      data.value = res.category
       categories.data.push({
         ...category,
         id: Math.round(Math.random() * 1000000),
@@ -41,12 +41,16 @@ export const useCategoriesStore = defineStore('categories', () => {
   const data = ref<CategoryResponse[]>([])
   const loading = ref(false)
   const error = ref()
+  const pagination = ref<Pagination>({
+    page: 1,
+    limit: 10,
+  })
 
   async function fetchCategories(): Promise<void> {
     try {
       loading.value = true
-      const res = (await fetchList()) as { data: CategoryResponse[] }
-      data.value = res.data
+      const res = await handleFetchCategories(pagination.value)
+      data.value = res.categories
     } catch (error: unknown) {
       error.value = error
     } finally {

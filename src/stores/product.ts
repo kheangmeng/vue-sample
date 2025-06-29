@@ -1,7 +1,7 @@
 import { ref, reactive } from 'vue'
 import { defineStore } from 'pinia'
-import { handleCreate, fetchList } from '@/api/productApi'
-import type { Product, ProductResponse, CreateResponse } from '@/types'
+import { handleCreateProduct, handleFetchProducts } from '@/api/productApi'
+import type { Product, ProductList, CreateResponse, Pagination } from '@/types'
 
 export const useProductStore = defineStore('product', () => {
   const product = reactive<Product>({
@@ -31,7 +31,7 @@ export const useProductStore = defineStore('product', () => {
   async function handleSubmit(): Promise<void> {
     try {
       loading.value = true
-      const res = (await handleCreate(product)) as CreateResponse
+      const res = await handleCreateProduct(product)
       data.value = res
     } catch (error: unknown) {
       error.value = error
@@ -44,15 +44,19 @@ export const useProductStore = defineStore('product', () => {
 })
 
 export const useProductsStore = defineStore('products', () => {
-  const data = ref<ProductResponse[]>([])
+  const data = ref<ProductList[]>([])
   const loading = ref(false)
   const error = ref()
+  const pagination = ref<Pagination>({
+    page: 1,
+    limit: 10,
+  })
 
   async function fetchProducts(): Promise<void> {
     try {
       loading.value = true
-      const res = (await fetchList()) as { data: ProductResponse[] }
-      data.value = res.data
+      const res = await handleFetchProducts(pagination.value)
+      data.value = res.products
     } catch (error: unknown) {
       error.value = error
     } finally {
