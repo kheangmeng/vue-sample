@@ -12,14 +12,14 @@ import withMac from '@/assets/with-mac.png'
             industry for over 8 years, and here’s what I use:
           </p>
           <p class="text-lg text-h6">
-            <span style="color: rgb(66, 184, 131)">Vue.js</span>,
-            <span style="color: rgb(97, 218, 251)">React.js</span>,
-            <span style="color: rgb(0 221 130)">Nuxt.js</span>,
-            <span style="color: rgb(49, 120, 198)">TypeScript</span>,
-            <span style="color: rgb(56, 189, 249)">Tailwind CSS</span>,
-            <span style="color: rgb(28 102 192)">Vuetify</span>,
-            <span style="color: rgb(9 180 255)">Quasar</span> and
-            <span style="color: rgb(62 159 255)">Element-plus</span>
+            <span style="text-decoration: underline 2px rgb(66, 184, 131)">Vue.js</span>,
+            <span style="text-decoration: underline 2px rgb(97, 218, 251)">React.js</span>,
+            <span style="text-decoration: underline 2px rgb(0 221 130)">Nuxt.js</span>,
+            <span style="text-decoration: underline 2px rgb(49, 120, 198)">TypeScript</span>,
+            <span style="text-decoration: underline 2px rgb(56, 189, 249)">Tailwind CSS</span>,
+            <span style="text-decoration: underline 2px rgb(28 102 192)">Vuetify</span>,
+            <span style="text-decoration: underline 2px rgb(9 180 255)">Quasar</span> and
+            <span style="text-decoration: underline 2px rgb(62 159 255)">Element-plus</span>
           </p>
         </div>
       </v-col>

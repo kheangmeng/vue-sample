@@ -14,7 +14,7 @@ function handleLogout(): void {
   <v-layout class="rounded rounded-md border">
     <v-app-bar :elevation="2">
       <v-app-bar-title @click="$router.push('/')" class="cursor-pointer">
-        <v-icon icon="mdi-volleyball" /> GY Group
+        <v-icon icon="mdi-volleyball" /> Vue Sample
       </v-app-bar-title>
 
       <v-btn icon color="red" variant="tonal" class="mr-2" @click="handleLogout">
@@ -46,7 +46,7 @@ function handleLogout(): void {
     </v-main>
 
     <v-footer app class="text-center d-flex flex-column ga-2 py-4">
-      <div>{{ new Date().getFullYear() }} — <strong>@GY Group</strong></div>
+      <div>>© {{ new Date().getFullYear() }} — <strong>Vue Sample</strong></div>
     </v-footer>
   </v-layout>
 </template>

@@ -5,7 +5,7 @@ const icons = ['mdi-facebook', 'mdi-twitter', 'mdi-linkedin', 'mdi-instagram']
   <v-layout class="rounded rounded-md border">
     <v-app-bar>
       <v-app-bar-title @click="$router.push('/')" class="cursor-pointer">
-        <v-icon icon="mdi-volleyball" /> GY Group
+        <v-icon icon="mdi-volleyball" /> Vue Sample
       </v-app-bar-title>
 
       <v-btn
@@ -26,7 +26,7 @@ const icons = ['mdi-facebook', 'mdi-twitter', 'mdi-linkedin', 'mdi-instagram']
       </v-container>
     </v-main>
 
-    <v-footer app class="text-center d-flex flex-column ga-2 py-4" color="grey-lighten-1">
+    <v-footer app class="text-center d-flex flex-column ga-2 py-4" color="black">
       <div class="d-flex ga-3">
         <v-btn
           v-for="icon in icons"
@@ -50,7 +50,7 @@ const icons = ['mdi-facebook', 'mdi-twitter', 'mdi-linkedin', 'mdi-instagram']
 
       <v-divider></v-divider>
 
-      <div>{{ new Date().getFullYear() }} — <strong>@GY Group</strong></div>
+      <div>© {{ new Date().getFullYear() }} — <strong>Vue Sample</strong></div>
     </v-footer>
   </v-layout>
 </template>
