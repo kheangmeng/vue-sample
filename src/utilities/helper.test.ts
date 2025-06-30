@@ -1,6 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { formatCurrency } from './helper'
-import { formatDate } from './helper'
+import { formatCurrency, formatDate, isEmail, isWebsite } from './helper'
 
 describe('formatCurrency', () => {
   it('formats positive numbers correctly', () => {
@@ -44,5 +43,68 @@ describe('formatCurrency', () => {
       const formatted = formatDate('invalid-date')
       expect(formatted).toBe('Invalid Date')
     })
+  })
+})
+
+describe('isEmail', () => {
+  it('returns true for valid emails', () => {
+    expect(isEmail('test@example.com')).toBe(true)
+    expect(isEmail('username@com')).toBe(true)
+    expect(isEmail('user.name+tag+sorting@example.com')).toBe(true)
+    expect(isEmail('user_name@example.co.uk')).toBe(true)
+    expect(isEmail('user-name@sub.domain.com')).toBe(true)
+    expect(isEmail('a@b.co')).toBe(true)
+    expect(isEmail('1234567890@example.com')).toBe(true)
+    expect(isEmail('email@123.123.123.123')).toBe(true)
+    // expect(isEmail('email@[123.123.123.123]')).toBe(true)
+  })
+
+  it('returns false for invalid emails', () => {
+    expect(isEmail('plainaddress')).toBe(false)
+    expect(isEmail('@missingusername.com')).toBe(false)
+    expect(isEmail('username@.com')).toBe(false)
+    expect(isEmail('username@.com.')).toBe(false)
+    expect(isEmail('username@-example.com')).toBe(false)
+    expect(isEmail('username@example..com')).toBe(false)
+    expect(isEmail('username@example.com.')).toBe(false)
+    expect(isEmail('username@.example.com')).toBe(false)
+    expect(isEmail('username@exam_ple.com')).toBe(false)
+    expect(isEmail('')).toBe(false)
+    expect(isEmail('a'.repeat(65) + '@example.com')).toBe(false) // local part too long
+    expect(isEmail('user@' + 'a'.repeat(250) + '.com')).toBe(false) // domain too long
+  })
+})
+
+describe('isWebsite', () => {
+  it('returns true for valid websites with http/https', () => {
+    expect(isWebsite('http://example.com')).toBe(true)
+    expect(isWebsite('https://example.com')).toBe(true)
+    expect(isWebsite('https://www.example.com')).toBe(true)
+    expect(isWebsite('http://sub.domain.co.uk')).toBe(true)
+    expect(isWebsite('https://example.com/path')).toBe(true)
+    expect(isWebsite('https://example.com/path/to/page?query=1')).toBe(true)
+    expect(isWebsite('https://example.com:8080')).toBe(true)
+    expect(isWebsite('https://example.com/#anchor')).toBe(true)
+  })
+
+  it('returns true for valid websites without protocol', () => {
+    expect(isWebsite('example.com')).toBe(true)
+    expect(isWebsite('www.example.com')).toBe(true)
+    expect(isWebsite('sub.domain.com')).toBe(true)
+    expect(isWebsite('example.co.uk')).toBe(true)
+  })
+
+  it('returns false for invalid websites', () => {
+    expect(isWebsite('http://')).toBe(false)
+    expect(isWebsite('https://')).toBe(false)
+    expect(isWebsite('example')).toBe(false)
+    expect(isWebsite('http:/example.com')).toBe(false)
+    expect(isWebsite('://example.com')).toBe(false)
+    expect(isWebsite('http//example.com')).toBe(false)
+    expect(isWebsite('')).toBe(false)
+    expect(isWebsite('http://.com')).toBe(false)
+    expect(isWebsite('http://example..com')).toBe(false)
+    expect(isWebsite('http://example.com-')).toBe(false)
+    expect(isWebsite('http://example_.com')).toBe(false)
   })
 })

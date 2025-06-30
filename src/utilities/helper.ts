@@ -16,3 +16,16 @@ export function formatCurrency(amount: number): string {
     currency: 'USD',
   }).format(amount)
 }
+
+export function isEmail(email: string): boolean {
+  const emailRegex =
+    /^(?=.{1,254}$)(?=.{1,64}@)[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
+
+  return emailRegex.test(email)
+}
+
+export function isWebsite(website: string): boolean {
+  const websiteRegex =
+    /^(https?:\/\/)?(www\.)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,6}(:\d{1,5})?(\/[a-zA-Z0-9-._~:/?#\[\]@!$&'()*+,;=%]*)?$/i
+  return websiteRegex.test(website)
+}

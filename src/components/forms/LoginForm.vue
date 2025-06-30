@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useLoginStore } from '@/stores/login'
+import { required, minLength, validEmail } from '@/utilities/validator'
 
 const store = useLoginStore()
 const visible = ref(false)
@@ -8,9 +9,6 @@ const visible = ref(false)
 function onSubmit(): void {
   if (!store.valid) return
   store.handleSubmit()
-}
-function required(v: string): string | boolean {
-  return !!v || 'Field is required'
 }
 </script>
 
@@ -21,7 +19,7 @@ function required(v: string): string | boolean {
       <v-text-field
         v-model="store.login.email"
         :readonly="store.loading"
-        :rules="[required]"
+        :rules="[required, validEmail]"
         density="compact"
         placeholder="Email"
         prepend-inner-icon="mdi-email-outline"
@@ -44,7 +42,7 @@ function required(v: string): string | boolean {
       <v-text-field
         v-model="store.login.password"
         :readonly="store.loading"
-        :rules="[required]"
+        :rules="[required, (v) => minLength(v, 8)]"
         :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
         :type="visible ? 'text' : 'password'"
         density="compact"
