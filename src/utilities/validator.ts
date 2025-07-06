@@ -19,3 +19,7 @@ export function minLength(v: string, min: number): string | boolean {
 export function maxLength(v: string, max: number): string | boolean {
   return v.length <= max || `Maximum length is ${max}`
 }
+
+export function comparePassword(v: string, password: string): string | boolean {
+  return v === password || 'Confirm password mismatched.'
+}

@@ -2,6 +2,8 @@ import GuestLayout from '@/layouts/GuestLayout.vue'
 import HomePage from '@/pages/HomePage.vue'
 import AboutPage from '@/pages/AboutPage.vue'
 import LoginPage from '@/pages/LoginPage.vue'
+import ForgotPasswordPage from '@/pages/ForgotPasswordPage.vue'
+import ResetPasswordPage from '@/pages/ResetPasswordPage.vue'
 
 export default [
   {
@@ -23,6 +25,16 @@ export default [
         path: '/login',
         name: 'login',
         component: LoginPage,
+      },
+      {
+        path: '/forgot-password',
+        name: 'forgot-password',
+        component: ForgotPasswordPage,
+      },
+      {
+        path: '/reset-password/:token',
+        name: 'reset-password',
+        component: ResetPasswordPage,
       },
     ],
   },

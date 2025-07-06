@@ -7,10 +7,14 @@ import withMac from '@/assets/with-mac.png'
     <v-row>
       <v-col cols="12" sm="6" class="d-flex align-center">
         <div class="text-">
-          <p class="text-subtitle-1">
-            Hello there! I’m <strong>Kheangmeng</strong>, a frontend developer. I’ve been in this
-            industry for over 8 years, and here’s what I use:
-          </p>
+          <div class="text-subtitle-1 d-flex align-center">
+            <v-avatar variant="elevated" :image="hiThere" class="mr-2 mb-3"></v-avatar>
+            <div>
+              👋 Hello there! I’m
+              <strong>Kheangmeng</strong>, a frontend developer. I’ve been in this industry for over
+              8 years, and here’s what I use:
+            </div>
+          </div>
           <p class="text-lg text-h6">
             <span style="text-decoration: underline 2px rgb(66, 184, 131)">Vue.js</span>,
             <span style="text-decoration: underline 2px rgb(97, 218, 251)">React.js</span>,
@@ -23,19 +27,17 @@ import withMac from '@/assets/with-mac.png'
           </p>
         </div>
       </v-col>
-      <v-col cols="12" sm="3">
-        <v-img class="bg-white" :src="hiThere" width="200"></v-img>
-      </v-col>
     </v-row>
 
     <v-row>
-      <v-col cols="12" sm="3">
-        <v-img class="bg-white" :src="withMac" width="200"></v-img>
-      </v-col>
       <v-col cols="12" sm="6" class="d-flex align-center">
-        <div class="text-subtitle-1">
-          I usually build web admin using Vue.js and TypeScript. I use Quasar, Vuetify and
-          Element-plus as my UI frameworks. I also love playing video games and listening to music.
+        <div class="text-subtitle-1 d-flex align-start">
+          <v-avatar variant="elevated" :image="withMac" class="mr-2"></v-avatar>
+          <div>
+            I usually build system admin using Vue.js and TypeScript. I use Quasar, Vuetify and
+            Element-plus as my UI frameworks. I also love playing video games and listening to
+            music.
+          </div>
         </div>
       </v-col>
     </v-row>
