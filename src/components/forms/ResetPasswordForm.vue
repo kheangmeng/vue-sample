@@ -17,14 +17,18 @@ const resetForm = reactive<{
   confirmPassword: '',
 })
 
-function onSubmit(): void {
+async function onSubmit(): Promise<void> {
   if (!valid.value) return
   loading.value = true
   try {
-    fetch(`http://localhost:3000/reset-password/${token}`, {
+    const res = await fetch(`http://localhost:3000/api/auth/reset-password/${token}`, {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify(resetForm),
     })
+    console.log('res:', res)
   } catch (error) {
     console.log(error)
   } finally {

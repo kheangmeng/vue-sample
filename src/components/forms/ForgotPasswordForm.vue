@@ -10,14 +10,18 @@ const forgotPasswordForm = reactive<{
   email: '',
 })
 
-function onSubmit(): void {
+async function onSubmit(): Promise<void> {
   if (!valid.value) return
   loading.value = true
   try {
-    fetch('http://localhost:3000/forgot-password', {
+    const res = await fetch('http://localhost:3000/api/auth/forgot-password', {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify(forgotPasswordForm),
     })
+    console.log('res:', res)
   } catch (error) {
     console.log(error)
   } finally {
