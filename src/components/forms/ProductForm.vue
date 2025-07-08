@@ -46,9 +46,45 @@ const popupCategory = ref(false)
 const fileUploaded = ref<File | null>(null)
 const objUrl = ref<string>('')
 async function handleFileUpload(file: File | File[]): Promise<void> {
-  fileUploaded.value = file as File
-  objUrl.value = URL.createObjectURL(fileUploaded.value)
-  store.product.imageUrl = file ? objUrl.value : ''
+  // fileUploaded.value = file as File
+  // objUrl.value = URL.createObjectURL(fileUploaded.value)
+  // store.product.imageUrl = file ? objUrl.value : ''
+
+  // singleUploadFile(file as File)
+  multipleUploadFile(file as File[])
+}
+
+async function singleUploadFile(file: File): Promise<string> {
+  const formData = new FormData()
+  formData.append('file', file)
+  try {
+    const response = await fetch('http://localhost:3000/api/uploads/single', {
+      method: 'POST',
+      body: formData,
+    })
+    const data = await response.json()
+    return data.url
+  } catch (error) {
+    console.error('Error uploading file:', error)
+    throw error
+  }
+}
+async function multipleUploadFile(files: File[]): Promise<string> {
+  const formData = new FormData()
+  files.forEach((file) => {
+    formData.append('files', file)
+  })
+  try {
+    const response = await fetch('http://localhost:3000/api/uploads/multiple', {
+      method: 'POST',
+      body: formData,
+    })
+    const data = await response.json()
+    return data.url
+  } catch (error) {
+    console.error('Error uploading files:', error)
+    throw error
+  }
 }
 // function convertFileToBase64(file: File): Promise<string> {
 //   return new Promise((resolve, reject) => {
@@ -207,6 +243,7 @@ async function handleFileUpload(file: File | File[]): Promise<void> {
               :model-value="fileUploaded"
               @update:model-value="handleFileUpload"
               label="Image"
+              multiple
               prepend-icon="mdi-image"
               variant="outlined"
               density="compact"
