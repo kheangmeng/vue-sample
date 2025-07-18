@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
+import NotificationManager from '../components/NotificationManager.vue'
 
 const router = useRouter()
 const authStore = useAuthStore()
@@ -41,6 +42,8 @@ function handleLogout(): void {
 
     <v-main class="d-flex align-center justify-center">
       <v-container>
+        <NotificationManager />
+        <br />
         <router-view />
       </v-container>
     </v-main>
