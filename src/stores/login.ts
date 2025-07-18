@@ -8,8 +8,8 @@ import { handleLogin, mapResponse } from '@/api/authApi'
 export const useLoginStore = defineStore('login', () => {
   const router = useRouter()
   const login = reactive<Login>({
-    email: '',
-    password: '',
+    email: 'vue.sample@gmail.com',
+    password: 'secret123',
   })
   const authStore = useAuthStore()
   const status = ref<'idle' | 'submitting' | 'finished'>('idle')
