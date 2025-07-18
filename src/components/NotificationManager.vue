@@ -7,6 +7,7 @@ const fcmToken = ref('')
 const notificationMessage = ref('')
 const isSubscribed = ref(false)
 
+const BASE_PATH = import.meta.env.BASE_URL
 const VAPID_KEY =
   'BNSV2DvPsrNblkgChinb112a7rGz-w5jtupXhiGKlGcs4NGp9BBzhNWXseKP-oxPoSxPwxDucnjlOaKpioDISqE' // Get this from Firebase Console -> Project settings -> Cloud Messaging -> Web Push certificates
 
@@ -30,8 +31,31 @@ const requestNotificationPermission = async () => {
 // Function to get the FCM token and send it to your backend
 const getAndSendToken = async () => {
   try {
+    let registration = null
+    if ('serviceWorker' in navigator) {
+      console.log('Attempting to register service worker...')
+      try {
+        registration = await navigator.serviceWorker.register(
+          `${BASE_PATH}firebase-messaging-sw.js`, // Use BASE_PATH
+          { scope: BASE_PATH }, // Set the scope to your base path
+        )
+        console.log('Service Worker registered successfully with scope:', registration.scope)
+      } catch (swError) {
+        console.error('Service Worker registration failed:', swError)
+        // If registration fails, Firebase Messaging won't work correctly.
+        // You might want to prevent getToken from being called if this happens.
+        return
+      }
+    } else {
+      console.warn('Service Workers are not supported in this browser.')
+      return
+    }
+
     // Get FCM token. The service worker is automatically registered here.
-    const currentToken = await getToken(messaging, { vapidKey: VAPID_KEY })
+    const currentToken = await getToken(messaging, {
+      vapidKey: VAPID_KEY,
+      serviceWorkerRegistration: registration,
+    })
 
     if (currentToken) {
       console.log('FCM Registration Token:', currentToken)
