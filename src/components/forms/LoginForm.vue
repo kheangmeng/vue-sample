@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import { useLoginStore } from '@/stores/login'
 import { required, minLength, validEmail } from '@/utilities/validator'
+import GoogleSignIn from '../GoogleSignIn.vue'
 
 const store = useLoginStore()
 const visible = ref(false)
@@ -67,6 +68,8 @@ function onSubmit(): void {
       >
         Log In
       </v-btn>
+
+      <GoogleSignIn />
 
       <v-card-text class="text-center">
         <a
