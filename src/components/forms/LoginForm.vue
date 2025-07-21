@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { useLoginStore } from '@/stores/login'
 import { required, minLength, validEmail } from '@/utilities/validator'
 import GoogleSignIn from '../GoogleSignIn.vue'
+import FacebookSignIn from '../FacebookSignIn.vue'
 
 const store = useLoginStore()
 const visible = ref(false)
@@ -69,7 +70,15 @@ function onSubmit(): void {
         Log In
       </v-btn>
 
+      <v-divider>
+        <span class="text-caption">OR</span>
+      </v-divider>
+      <br />
+
       <GoogleSignIn />
+      <br />
+      <FacebookSignIn />
+      <br />
 
       <v-card-text class="text-center">
         <a
