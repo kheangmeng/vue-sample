@@ -10,7 +10,7 @@ const loading = ref(false)
 async function onSubmit(): Promise<void> {
   loading.value = true
   try {
-    const res = await fetch(`http://localhost:3000/api/auth/verify-email/${token}`, {
+    const res = await fetch(`${import.meta.env.VITE_BASE_API}/api/auth/verify-email/${token}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -32,7 +32,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div v-if="!verified" class="mt-16">
+  <div v-if="verified" class="mt-16">
     <h1>Account has been confirmed!</h1>
     <v-btn to="/login">Login</v-btn>
   </div>

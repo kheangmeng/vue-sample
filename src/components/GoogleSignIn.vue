@@ -18,7 +18,7 @@ function handleCredentialResponse(response: any) {
   console.log('Encoded ID Token:', id_token)
 
   // Send this ID token to your backend
-  fetch('http://localhost:3000/api/auth/google-verify-token', {
+  fetch(`${import.meta.env.VITE_BASE_API}/api/auth/google-verify-token`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

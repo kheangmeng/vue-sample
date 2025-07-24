@@ -21,7 +21,7 @@ async function onSubmit(): Promise<void> {
   if (!valid.value) return
   loading.value = true
   try {
-    const res = await fetch(`http://localhost:3000/api/auth/reset-password/${token}`, {
+    const res = await fetch(`${import.meta.env.VITE_BASE_API}/api/auth/reset-password/${token}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

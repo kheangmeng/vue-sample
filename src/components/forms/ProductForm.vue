@@ -58,7 +58,7 @@ async function singleUploadFile(file: File): Promise<string> {
   const formData = new FormData()
   formData.append('file', file)
   try {
-    const response = await fetch('http://localhost:3000/api/uploads/single', {
+    const response = await fetch(`${import.meta.env.VITE_BASE_API}/api/uploads/single`, {
       method: 'POST',
       body: formData,
     })
@@ -75,7 +75,7 @@ async function multipleUploadFile(files: File[]): Promise<string> {
     formData.append('files', file)
   })
   try {
-    const response = await fetch('http://localhost:3000/api/uploads/multiple', {
+    const response = await fetch(`${import.meta.env.VITE_BASE_API}/api/uploads/multiple`, {
       method: 'POST',
       body: formData,
     })

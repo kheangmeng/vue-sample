@@ -65,7 +65,7 @@ const getAndSendToken = async () => {
       // TODO: Send this token to your backend API
       // Example using fetch (replace with your actual backend endpoint and user ID)
       const userId = 5 // Replace with the actual user ID from your auth system
-      await fetch('http://localhost:3000/api/notifications/save-fcm-token', {
+      await fetch(`${import.meta.env.VITE_BASE_API}/api/notifications/save-fcm-token`, {
         // Replace with your backend URL
         method: 'POST',
         headers: {
