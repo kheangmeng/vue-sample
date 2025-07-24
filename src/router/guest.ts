@@ -4,6 +4,7 @@ import AboutPage from '@/pages/AboutPage.vue'
 import LoginPage from '@/pages/LoginPage.vue'
 import ForgotPasswordPage from '@/pages/ForgotPasswordPage.vue'
 import ResetPasswordPage from '@/pages/ResetPasswordPage.vue'
+import VerifiedSignupPage from '@/pages/VerifiedSignupPage.vue'
 
 export default [
   {
@@ -35,6 +36,11 @@ export default [
         path: '/reset-password/:token',
         name: 'reset-password',
         component: ResetPasswordPage,
+      },
+      {
+        path: '/verify-email/:token',
+        name: 'verify-email',
+        component: VerifiedSignupPage,
       },
     ],
   },
