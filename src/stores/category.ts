@@ -1,6 +1,6 @@
 import { ref, reactive } from 'vue'
 import { defineStore } from 'pinia'
-import { handleCreateCategory, handleFetchCategories } from '@/api/categoryApi'
+import { handleCreateCategory, handleFetchCategories } from '@/api/fake/categoryApi'
 import type { Category, CategoryResponse, Pagination } from '@/types'
 
 export const useCategoryStore = defineStore('category', () => {

@@ -1,6 +1,6 @@
 import { ref, reactive } from 'vue'
 import { defineStore } from 'pinia'
-import { handleCreateProduct, handleFetchProducts } from '@/api/productApi'
+import { handleCreateProduct, handleFetchProducts } from '@/api/fake/productApi'
 import type { Product, ProductList, CreateResponse, Pagination } from '@/types'
 
 export const useProductStore = defineStore('product', () => {

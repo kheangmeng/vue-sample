@@ -3,7 +3,7 @@ import { useRouter } from 'vue-router'
 import { defineStore } from 'pinia'
 import type { Login, LoginResponse } from '@/types'
 import { useAuthStore } from '@/stores/auth'
-import { handleLogin, mapResponse } from '@/api/authApi'
+import { handleLogin, mapResponse } from '@/api/fake/authApi'
 
 export const useLoginStore = defineStore('login', () => {
   const router = useRouter()
@@ -25,7 +25,7 @@ export const useLoginStore = defineStore('login', () => {
       const res = await handleLogin(login)
       data.value = mapResponse(res)
       authStore.setAuthenticated(true)
-      router.push('/products')
+      router.replace('/products')
     } catch (error: unknown) {
       error.value = error
     } finally {
