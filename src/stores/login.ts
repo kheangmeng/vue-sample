@@ -1,9 +1,10 @@
 import { ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { defineStore } from 'pinia'
-import type { Login, LoginResponse } from '@/types'
 import { useAuthStore } from '@/stores/auth'
-import { handleLogin, mapResponse } from '@/api/fake/authApi'
+import { handleLogin as handleLoginFake, mapResponse } from '@/api/fake/authApi'
+import { handleLogin } from '@/api/http/authApi'
+import type { Login, LoginResponse } from '@/types'
 
 export const useLoginStore = defineStore('login', () => {
   const router = useRouter()
@@ -22,8 +23,13 @@ export const useLoginStore = defineStore('login', () => {
     try {
       status.value = 'submitting'
       loading.value = true
-      const res = await handleLogin(login)
-      data.value = mapResponse(res)
+      if (import.meta.env.VITE_ENV === 'development') {
+        data.value = await handleLogin(login)
+      } else {
+        const res = await handleLoginFake(login)
+        data.value = mapResponse(res)
+      }
+      localStorage.setItem('token', data.value.token)
       authStore.setAuthenticated(true)
       router.replace('/products')
     } catch (error: unknown) {

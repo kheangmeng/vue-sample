@@ -49,7 +49,7 @@ function handleLogout(): void {
     </v-main>
 
     <v-footer app class="text-center d-flex flex-column ga-2 py-4">
-      <div>>© {{ new Date().getFullYear() }} — <strong>Vue Sample</strong></div>
+      <div>© {{ new Date().getFullYear() }} — <strong>Vue Sample</strong></div>
     </v-footer>
   </v-layout>
 </template>
