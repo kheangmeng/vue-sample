@@ -26,6 +26,7 @@ function handleLogout(): void {
     <v-navigation-drawer>
       <v-list nav>
         <v-list-item prepend-icon="mdi-package-variant" title="Product" link></v-list-item>
+        <v-list-item prepend-icon="mdi-account-group" title="Customer" link></v-list-item>
         <v-list-item prepend-icon="mdi-sale" title="Discount" link></v-list-item>
         <v-list-item prepend-icon="mdi-percent" title="Promotion" link></v-list-item>
         <v-list-item prepend-icon="mdi-shape" title="Category" link></v-list-item>

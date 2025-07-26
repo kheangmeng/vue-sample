@@ -4,6 +4,10 @@ export interface Login {
 }
 export interface LoginResponse {
   token: string
+  refreshToken: string
+}
+export interface RefreshTokenResponse {
+  token: string
 }
 
 export interface AuthUser {

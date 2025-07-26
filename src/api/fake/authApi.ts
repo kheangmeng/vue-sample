@@ -21,5 +21,6 @@ export async function handleLogin(credentials: Login): Promise<{ user: AuthUser;
 export function mapResponse(data: any): LoginResponse {
   return {
     token: data?.token,
+    refreshToken: data?.refreshToken,
   }
 }

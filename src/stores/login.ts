@@ -30,6 +30,7 @@ export const useLoginStore = defineStore('login', () => {
         data.value = mapResponse(res)
       }
       localStorage.setItem('token', data.value.token)
+      localStorage.setItem('refreshToken', data.value.refreshToken)
       authStore.setAuthenticated(true)
       router.replace('/products')
     } catch (error: unknown) {
