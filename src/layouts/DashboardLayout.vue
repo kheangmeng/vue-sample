@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import NotificationManager from '../components/NotificationManager.vue'
@@ -9,11 +10,14 @@ function handleLogout(): void {
   authStore.setAuthenticated(false)
   router.push('/login')
 }
+
+const drawer = ref(false)
 </script>
 
 <template>
   <v-layout class="rounded rounded-md border">
     <v-app-bar :elevation="2">
+      <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-app-bar-title @click="$router.push('/')" class="cursor-pointer">
         <v-icon icon="mdi-volleyball" /> Vue Sample
       </v-app-bar-title>
@@ -23,20 +27,30 @@ function handleLogout(): void {
       </v-btn>
     </v-app-bar>
 
-    <v-navigation-drawer>
+    <v-navigation-drawer v-model="drawer" :location="$vuetify.display.mobile ? 'left' : undefined">
       <v-list nav>
-        <v-list-item prepend-icon="mdi-package-variant" title="Product" link></v-list-item>
-        <v-list-item prepend-icon="mdi-account-group" title="Customer" link></v-list-item>
-        <v-list-item prepend-icon="mdi-sale" title="Discount" link></v-list-item>
-        <v-list-item prepend-icon="mdi-percent" title="Promotion" link></v-list-item>
-        <v-list-item prepend-icon="mdi-shape" title="Category" link></v-list-item>
-        <v-list-item prepend-icon="mdi-truck" title="Supplier" link></v-list-item>
-        <v-list-item prepend-icon="mdi-file-chart" title="Report" link></v-list-item>
+        <v-list-item
+          prepend-icon="mdi-package-variant"
+          title="Product"
+          link
+          to="products"
+        ></v-list-item>
+        <v-list-item
+          prepend-icon="mdi-account-group"
+          title="Customer"
+          link
+          to="/customers"
+        ></v-list-item>
+        <v-list-item prepend-icon="mdi-sale" title="Discount" link disabled></v-list-item>
+        <v-list-item prepend-icon="mdi-percent" title="Promotion" link disabled></v-list-item>
+        <v-list-item prepend-icon="mdi-shape" title="Category" link disabled></v-list-item>
+        <v-list-item prepend-icon="mdi-truck" title="Supplier" link disabled></v-list-item>
+        <v-list-item prepend-icon="mdi-file-chart" title="Report" link disabled></v-list-item>
       </v-list>
       <template v-slot:append>
         <v-divider></v-divider>
         <div class="pa-2">
-          <v-list-item prepend-icon="mdi-cog" title="Setting" link></v-list-item>
+          <v-list-item prepend-icon="mdi-cog" title="Setting" link disabled></v-list-item>
         </div>
       </template>
     </v-navigation-drawer>

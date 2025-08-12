@@ -77,7 +77,7 @@ function onSubmit(): void {
 
       <GoogleSignIn />
       <br />
-      <FacebookSignIn />
+      <!-- <FacebookSignIn /> -->
       <br />
 
       <v-card-text class="text-center">

@@ -9,8 +9,8 @@ import type { Login, LoginResponse } from '@/types'
 export const useLoginStore = defineStore('login', () => {
   const router = useRouter()
   const login = reactive<Login>({
-    email: 'vue.sample@gmail.com',
-    password: 'secret123',
+    email: 'superstaff@gmail.com',
+    password: 'Password@',
   })
   const authStore = useAuthStore()
   const status = ref<'idle' | 'submitting' | 'finished'>('idle')

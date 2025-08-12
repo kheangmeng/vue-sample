@@ -27,11 +27,10 @@ function handleCredentialResponse(response: any) {
   })
     .then((res) => res.json())
     .then((data) => {
-      console.log('Backend response:', data)
       if (data.token) {
         // Store the JWT (e.g., in localStorage or a state management solution)
-        localStorage.setItem('jwtToken', data.token)
-        alert('Logged in successfully!')
+        localStorage.setItem('token', data.token)
+        // alert('Logged in successfully!')
         // Redirect or update UI
       } else {
         alert('Login failed: ' + data.message)
