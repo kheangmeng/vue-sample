@@ -3,11 +3,13 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import NotificationManager from '../components/NotificationManager.vue'
+import avatarUser from '@/assets/with-mac.png'
 
 const router = useRouter()
 const authStore = useAuthStore()
 function handleLogout(): void {
   authStore.setAuthenticated(false)
+  localStorage.clear()
   router.push('/login')
 }
 
@@ -22,9 +24,24 @@ const drawer = ref(false)
         <v-icon icon="mdi-volleyball" /> Vue Sample
       </v-app-bar-title>
 
-      <v-btn icon color="red" variant="tonal" class="mr-2" @click="handleLogout">
+      <!-- <v-btn icon color="red" variant="tonal" class="mr-2" @click="handleLogout">
         <v-icon icon="mdi-logout" />
-      </v-btn>
+      </v-btn> -->
+      <v-menu>
+        <template v-slot:activator="{ props }">
+          <v-list v-bind="props">
+            <v-list-item :prepend-avatar="avatarUser" subtitle="Software Engineer" title="Jonh doe">
+            </v-list-item>
+          </v-list>
+        </template>
+        <v-card min-width="150">
+          <v-list>
+            <v-list-item prepend-icon="mdi-account" title="Profile" disabled> </v-list-item>
+            <v-list-item prepend-icon="mdi-logout" color="red" title="Logout" @click="handleLogout">
+            </v-list-item>
+          </v-list>
+        </v-card>
+      </v-menu>
     </v-app-bar>
 
     <v-navigation-drawer v-model="drawer" :location="$vuetify.display.mobile ? 'left' : undefined">

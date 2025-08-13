@@ -1,22 +1,20 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import { useCustomersStore } from '@/stores/customer'
-// import { formatCurrency, formatDate } from '@/utilities/helper'
+import { formatDate } from '@/utilities/helper'
 
 const store = useCustomersStore()
-// const headers = [
-//   { title: 'Product Name', key: 'name', align: 'start', minWidth: '150px' },
-//   { title: 'Description', key: 'description', minWidth: '250px' },
-//   { title: 'Brand', key: 'brand', minWidth: '100px' },
-//   { title: 'Price', key: 'basePrice', minWidth: '100px' },
-//   { title: 'Sellable', key: 'isSellable', align: 'end', minWidth: '100px' },
-//   { title: 'SKU', key: 'sku', minWidth: '150px' },
-//   { title: 'Stock Quantity', key: 'stockQuantity', align: 'end', minWidth: '150px' },
-//   { title: 'Low Stock Threshold', key: 'lowStockThreshold', align: 'end', minWidth: '250px' },
-//   { title: 'Created At', key: 'createdAt', align: 'end', minWidth: '150px' },
-//   { title: 'Updated At', key: 'updatedAt', align: 'end', minWidth: '150px' },
-//   { title: 'Actions', key: 'actions', align: 'end', sortable: false, minWidth: '100px' },
-// ]
+const headers = [
+  { title: 'Customer Name', key: 'name', align: 'start', minWidth: '150px' },
+  { title: 'Gender', key: 'gender', minWidth: '100px' },
+  { title: 'Email', key: 'email', minWidth: '250px' },
+  { title: 'Phone', key: 'phone', minWidth: '150px' },
+  { title: 'Photo', key: 'photo_url', minWidth: '150px' },
+  { title: 'ID', key: 'id_card_number', align: 'end', minWidth: '100px' },
+  { title: 'Created At', key: 'createdAt', align: 'end', minWidth: '150px' },
+  { title: 'Updated At', key: 'updatedAt', align: 'end', minWidth: '150px' },
+  { title: 'Actions', key: 'actions', align: 'end', sortable: false, minWidth: '100px' },
+]
 
 onMounted(() => {
   store.fetchCustomers()
@@ -24,8 +22,7 @@ onMounted(() => {
 </script>
 <template>
   <v-sheet border rounded>
-    <pre>{{ store.data }}</pre>
-    <!-- <v-data-table
+    <v-data-table
       :headers="headers"
       :hide-default-footer="store.data.length < 11"
       :items="store.data"
@@ -41,7 +38,7 @@ onMounted(() => {
               start
             ></v-icon>
 
-            Products
+            Customers
           </v-toolbar-title>
 
           <v-btn
@@ -49,35 +46,24 @@ onMounted(() => {
             color="primary"
             prepend-icon="mdi-plus"
             rounded="lg"
-            text="Add a Product"
+            text="Add a Customer"
             border
-            @click="$router.push('/products/create')"
+            disabled
+            @click="$router.push('/customers/create')"
           ></v-btn>
         </v-toolbar>
       </template>
 
-      <template v-slot:item.title="{ value }">
-        <v-chip :text="value" border="thin opacity-25" prepend-icon="mdi-book" label>
-          <template v-slot:prepend>
-            <v-icon color="medium-emphasis"></v-icon>
-          </template>
-        </v-chip>
-      </template>
-
-      <template v-slot:item.basePrice="{ value }">
-        <div>{{ formatCurrency(value) }}</div>
-      </template>
-
-      <template v-slot:item.isSellable="{ value }">
-        <div>{{ value ? 'Yes' : 'No' }}</div>
+      <template v-slot:item.photo_url="{ item }">
+        <v-avatar color="grey">{{ item.name[0] }}</v-avatar>
       </template>
 
       <template v-slot:item.createdAt="{ value }">
-        <div>{{ formatDate(value) }}</div>
+        <div>{{ formatDate(new Date()) }}</div>
       </template>
 
       <template v-slot:item.updatedAt="{ value }">
-        <div>{{ formatDate(value) }}</div>
+        <div>{{ formatDate(new Date()) }}</div>
       </template>
 
       <template v-slot:item.actions="{ item }">
@@ -89,6 +75,6 @@ onMounted(() => {
       </template>
 
       <template v-slot:no-data> No data </template>
-    </v-data-table> -->
+    </v-data-table>
   </v-sheet>
 </template>
