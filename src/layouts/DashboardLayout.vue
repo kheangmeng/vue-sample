@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
-import NotificationManager from '../components/NotificationManager.vue'
+// import NotificationManager from '../components/NotificationManager.vue'
 import avatarUser from '@/assets/with-mac.png'
 
 const router = useRouter()
@@ -20,13 +20,15 @@ const drawer = ref(false)
   <v-layout class="rounded rounded-md border">
     <v-app-bar :elevation="2">
       <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-app-bar-title @click="$router.push('/')" class="cursor-pointer">
-        <v-icon icon="mdi-volleyball" /> Vue Sample
+      <v-app-bar-title>
+        <span class="cursor-pointer" @click="$router.push('/')">
+          <v-icon icon="mdi-volleyball" /> Vue Sample
+        </span>
       </v-app-bar-title>
 
-      <!-- <v-btn icon color="red" variant="tonal" class="mr-2" @click="handleLogout">
-        <v-icon icon="mdi-logout" />
-      </v-btn> -->
+      <v-btn icon class="mr-2">
+        <v-icon icon="mdi-bell" />
+      </v-btn>
       <v-menu>
         <template v-slot:activator="{ props }">
           <v-list v-bind="props">
@@ -58,6 +60,13 @@ const drawer = ref(false)
           link
           to="/customers"
         ></v-list-item>
+        <v-list-item
+          prepend-icon="mdi-currency-usd"
+          title="Payment"
+          link
+          to="/payments"
+          disabled
+        ></v-list-item>
         <v-list-item prepend-icon="mdi-sale" title="Discount" link disabled></v-list-item>
         <v-list-item prepend-icon="mdi-percent" title="Promotion" link disabled></v-list-item>
         <v-list-item prepend-icon="mdi-shape" title="Category" link disabled></v-list-item>
@@ -73,9 +82,9 @@ const drawer = ref(false)
     </v-navigation-drawer>
 
     <v-main class="d-flex align-center justify-center">
-      <v-container>
-        <NotificationManager />
-        <br />
+      <v-container style="min-height: 500px">
+        <!-- <NotificationManager />
+        <br /> -->
         <router-view />
       </v-container>
     </v-main>
