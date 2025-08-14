@@ -1,4 +1,4 @@
-import type { Login, LoginResponse, RefreshTokenResponse } from '@/types'
+import type { Login, LoginResponse, Signup, RefreshTokenResponse } from '@/types'
 
 const BASE_API = import.meta.env.VITE_BASE_API
 
@@ -37,7 +37,21 @@ export async function handleRefreshToken(): Promise<RefreshTokenResponse> {
 
 export async function handleLogout(): Promise<void> {}
 
-export async function handleRegister(): Promise<void> {}
+export async function handleSignup(req: Signup): Promise<string> {
+  const res = await fetch(`${BASE_API}/api/auth/signup`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(req),
+  })
+  const data = await res.json()
+  if (res.ok) {
+    return data.data?.message
+  } else {
+    throw new Error(data.message)
+  }
+}
 
 export async function handleForgotPassword(): Promise<void> {}
 

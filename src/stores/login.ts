@@ -17,7 +17,7 @@ export const useLoginStore = defineStore('login', () => {
   const data = ref<LoginResponse>()
   const valid = ref(false)
   const loading = ref(false)
-  const error = ref()
+  const error = ref('')
 
   async function handleSubmit() {
     try {
@@ -33,8 +33,8 @@ export const useLoginStore = defineStore('login', () => {
       localStorage.setItem('refreshToken', data.value.refreshToken)
       authStore.setAuthenticated(true)
       router.replace('/products')
-    } catch (error: unknown) {
-      error.value = error
+    } catch (e: unknown) {
+      error.value = e?.message
     } finally {
       status.value = 'finished'
       loading.value = false

@@ -3,7 +3,6 @@ import { ref } from 'vue'
 import { useLoginStore } from '@/stores/login'
 import { required, minLength, validEmail } from '@/utilities/validator'
 import GoogleSignIn from '../GoogleSignIn.vue'
-import FacebookSignIn from '../FacebookSignIn.vue'
 
 const store = useLoginStore()
 const visible = ref(false)
@@ -77,18 +76,11 @@ function onSubmit(): void {
 
       <GoogleSignIn />
       <br />
-      <!-- <FacebookSignIn /> -->
-      <br />
 
       <v-card-text class="text-center">
-        <a
-          class="text-blue text-decoration-none"
-          href="#"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
+        <router-link class="text-blue text-decoration-none" to="/signup">
           Sign up now <v-icon icon="mdi-chevron-right"></v-icon>
-        </a>
+        </router-link>
       </v-card-text>
     </v-form>
   </v-card>

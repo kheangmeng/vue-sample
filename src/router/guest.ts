@@ -2,6 +2,8 @@ import GuestLayout from '@/layouts/GuestLayout.vue'
 import HomePage from '@/pages/HomePage.vue'
 import AboutPage from '@/pages/AboutPage.vue'
 import LoginPage from '@/pages/LoginPage.vue'
+import SignupPage from '@/pages/SignupPage.vue'
+import SignupSuccessPage from '@/pages/SignupSuccessPage.vue'
 import ForgotPasswordPage from '@/pages/ForgotPasswordPage.vue'
 import ResetPasswordPage from '@/pages/ResetPasswordPage.vue'
 import VerifiedSignupPage from '@/pages/VerifiedSignupPage.vue'
@@ -26,6 +28,16 @@ export default [
         path: '/login',
         name: 'login',
         component: LoginPage,
+      },
+      {
+        path: '/signup',
+        name: 'signup',
+        component: SignupPage,
+      },
+      {
+        path: '/signup-success',
+        name: 'signup-success',
+        component: SignupSuccessPage,
       },
       {
         path: '/forgot-password',

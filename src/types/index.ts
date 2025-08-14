@@ -1,5 +1,6 @@
 export * from './common'
 export * from './login'
+export * from './signup'
 export * from './product'
 export * from './category'
 export * from './customer'
