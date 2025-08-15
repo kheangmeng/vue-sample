@@ -39,6 +39,10 @@ export async function getPayments(pagination: Pagination): Promise<PaymentRespon
         amount: payment.amount,
         payment_date: payment.payment_date,
         payment_method: payment.payment_method,
+        invoice: payment.Invoice,
+        order: payment.Order,
+        createdAt: payment.createdAt,
+        updatedAt: payment.updatedAt,
       }))
     } else {
       throw response

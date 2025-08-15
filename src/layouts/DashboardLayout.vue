@@ -65,7 +65,6 @@ const drawer = ref(false)
           title="Payment"
           link
           to="/payments"
-          disabled
         ></v-list-item>
         <v-list-item prepend-icon="mdi-sale" title="Discount" link disabled></v-list-item>
         <v-list-item prepend-icon="mdi-percent" title="Promotion" link disabled></v-list-item>

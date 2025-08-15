@@ -61,3 +61,18 @@ export interface ProductResponse {
   createdAt: string
   updatedAt: string
 }
+
+export interface ProductApi {
+  id: number
+  name: string
+  description?: string
+  category: Category
+  price: number
+  size: string
+  quantity_in_stock: number
+  is_active: boolean
+  images_json: string[]
+  tags_json: string[]
+  createdAt: string
+  updatedAt: string
+}

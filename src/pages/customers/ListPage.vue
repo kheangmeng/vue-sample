@@ -5,7 +5,7 @@ import { formatDate } from '@/utilities/helper'
 
 const store = useCustomersStore()
 const headers = [
-  { title: 'Customer Name', key: 'name', align: 'start', minWidth: '150px' },
+  { title: 'Customer Name', key: 'name', align: 'start', minWidth: '200px' },
   { title: 'Gender', key: 'gender', minWidth: '100px' },
   { title: 'Email', key: 'email', minWidth: '250px' },
   { title: 'Phone', key: 'phone', minWidth: '150px' },

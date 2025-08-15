@@ -11,7 +11,7 @@
               8 years, and here’s what I use:
             </div>
           </div>
-          <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; width: 500px">
+          <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px">
             [<span
               style="text-underline-offset: 3px; text-decoration: underline 3px rgb(66, 184, 131)"
               >Vue.js</span

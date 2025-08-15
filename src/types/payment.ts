@@ -1,3 +1,5 @@
+import type { Order, Invoice } from '@/types'
+
 export interface Payment {
   order_id: number
   amount: number
@@ -12,4 +14,8 @@ export interface PaymentResponse {
   amount: number
   payment_date: string
   payment_method: PaymentMethod
+  Invoice: Partial<Invoice>
+  Order: Partial<Order>
+  createdAt: string
+  updatedAt: string
 }
