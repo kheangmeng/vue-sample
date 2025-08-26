@@ -1,6 +1,8 @@
 import GuestLayout from '@/layouts/GuestLayout.vue'
 import HomePage from '@/pages/HomePage.vue'
 import AboutPage from '@/pages/AboutPage.vue'
+import WebsocketPage from '@/pages/WebsocketPage.vue'
+import WebSocketIoPage from '@/pages/WebSocketIoPage.vue'
 import LoginPage from '@/pages/LoginPage.vue'
 import SignupPage from '@/pages/SignupPage.vue'
 import SignupSuccessPage from '@/pages/SignupSuccessPage.vue'
@@ -23,6 +25,16 @@ export default [
         path: '/about',
         name: 'about',
         component: AboutPage,
+      },
+      {
+        path: '/websocket',
+        name: 'websocket',
+        component: WebsocketPage,
+      },
+      {
+        path: '/websocket-io',
+        name: 'websocket-io',
+        component: WebSocketIoPage,
       },
       {
         path: '/login',
