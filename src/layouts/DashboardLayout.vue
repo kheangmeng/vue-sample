@@ -66,6 +66,7 @@ const drawer = ref(false)
           link
           to="/payments"
         ></v-list-item>
+        <v-list-item prepend-icon="mdi-chat-outline" title="Chat" link to="/chats"></v-list-item>
         <v-list-item prepend-icon="mdi-sale" title="Discount" link disabled></v-list-item>
         <v-list-item prepend-icon="mdi-percent" title="Promotion" link disabled></v-list-item>
         <v-list-item prepend-icon="mdi-shape" title="Category" link disabled></v-list-item>
