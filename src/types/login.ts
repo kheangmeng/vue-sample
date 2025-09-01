@@ -1,3 +1,5 @@
+import type { UserResponse } from './user'
+
 export interface Login {
   email: string
   password: string
@@ -5,6 +7,7 @@ export interface Login {
 export interface LoginResponse {
   token: string
   refreshToken: string
+  profile: UserResponse
 }
 export interface RefreshTokenResponse {
   token: string

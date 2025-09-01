@@ -12,7 +12,8 @@ export async function handleLogin(credentials: Login): Promise<LoginResponse> {
   })
   const data = await res.json()
   if (res.ok) {
-    return { token: data.data?.token, refreshToken: data.data?.refreshToken }
+    const { token, refreshToken, profile } = data.data
+    return { token, refreshToken, profile }
   } else {
     throw new Error(data.message)
   }

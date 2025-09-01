@@ -22,5 +22,6 @@ export function mapResponse(data: any): LoginResponse {
   return {
     token: data?.token,
     refreshToken: data?.refreshToken,
+    profile: data?.profile,
   }
 }

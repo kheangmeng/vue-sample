@@ -4,6 +4,7 @@ import EditPage from '@/pages/products/EditPage.vue'
 import ListPage from '@/pages/products/ListPage.vue'
 import ListPageCustomer from '@/pages/customers/ListPage.vue'
 import ListPagePayment from '@/pages/payments/ListPage.vue'
+import ChatPage from '@/pages/ChatPage.vue'
 
 export default [
   {
@@ -79,6 +80,21 @@ export default [
       //   name: 'edit-product',
       //   component: EditPage,
       // },
+    ],
+  },
+  {
+    path: '/chats',
+    name: 'chats',
+    component: DashboardLayout,
+    meta: {
+      requiresAuth: true,
+    },
+    children: [
+      {
+        path: '',
+        name: 'list-chat',
+        component: ChatPage,
+      },
     ],
   },
 ]
