@@ -1,7 +1,7 @@
 import { ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { defineStore } from 'pinia'
-import { handleSignup } from '@/api/http/authApi'
+import { handleSignup } from '@/api/http/auth/fetchApi'
 import type { Signup } from '@/types'
 
 export const useSignupStore = defineStore('signup', () => {

@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import { useAuthStore } from '@/stores/auth'
 import { useRoute } from 'vue-router'
 
 const icons = ['mdi-facebook', 'mdi-twitter', 'mdi-linkedin', 'mdi-instagram']
 const route = useRoute()
+const authStore = useAuthStore()
 </script>
 <template>
   <v-layout class="rounded rounded-md border">
@@ -11,25 +13,38 @@ const route = useRoute()
         <v-icon icon="mdi-volleyball" /> Vue Sample
       </v-app-bar-title>
 
-      <v-btn
-        append-icon="mdi-login"
-        color="primary"
-        variant="tonal"
-        class="mr-2"
-        @click="$router.push('/login')"
-      >
-        Login
-      </v-btn>
-      <v-btn
-        to="/signup"
-        append-icon="mdi-account"
-        color="green"
-        variant="tonal"
-        class="mr-2"
-        v-show="route.name !== 'signup'"
-      >
-        Sign Up
-      </v-btn>
+      <template v-if="authStore.hasAuthenticated">
+        <v-btn
+          append-icon="mdi-package-variant"
+          color="primary"
+          variant="tonal"
+          class="mr-2"
+          @click="$router.push('/products')"
+        >
+          Products
+        </v-btn>
+      </template>
+      <template v-else>
+        <v-btn
+          append-icon="mdi-login"
+          color="primary"
+          variant="tonal"
+          class="mr-2"
+          @click="$router.push('/login')"
+        >
+          Login
+        </v-btn>
+        <v-btn
+          to="/signup"
+          append-icon="mdi-account"
+          color="green"
+          variant="tonal"
+          class="mr-2"
+          v-show="route.name !== 'signup'"
+        >
+          Sign Up
+        </v-btn>
+      </template>
     </v-app-bar>
 
     <v-main class="d-flex align-center justify-center">

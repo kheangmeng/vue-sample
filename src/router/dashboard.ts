@@ -5,6 +5,7 @@ import ListPage from '@/pages/products/ListPage.vue'
 import ListPageCustomer from '@/pages/customers/ListPage.vue'
 import ListPagePayment from '@/pages/payments/ListPage.vue'
 import ChatPage from '@/pages/ChatPage.vue'
+import SubscribePage from '@/pages/SubscribePage.vue'
 
 export default [
   {
@@ -94,6 +95,21 @@ export default [
         path: '',
         name: 'list-chat',
         component: ChatPage,
+      },
+    ],
+  },
+  {
+    path: '/subscribes',
+    name: 'subscribes',
+    component: DashboardLayout,
+    meta: {
+      requiresAuth: true,
+    },
+    children: [
+      {
+        path: '',
+        name: 'list-subscribe',
+        component: SubscribePage,
       },
     ],
   },

@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
-// import NotificationManager from '../components/NotificationManager.vue'
+import NotificationManager from '../components/NotificationManager.vue'
 import avatarUser from '@/assets/with-mac.png'
 
 const router = useRouter()
@@ -66,6 +66,12 @@ const drawer = ref(false)
           link
           to="/payments"
         ></v-list-item>
+        <v-list-item
+          prepend-icon="mdi-account-multiple-plus"
+          title="Subscribes"
+          link
+          to="/subscribes"
+        ></v-list-item>
         <v-list-item prepend-icon="mdi-chat-outline" title="Chat" link to="/chats"></v-list-item>
         <v-list-item prepend-icon="mdi-sale" title="Discount" link disabled></v-list-item>
         <v-list-item prepend-icon="mdi-percent" title="Promotion" link disabled></v-list-item>
@@ -83,8 +89,8 @@ const drawer = ref(false)
 
     <v-main class="d-flex align-center justify-center">
       <v-container style="min-height: 500px">
-        <!-- <NotificationManager />
-        <br /> -->
+        <NotificationManager />
+        <br />
         <router-view />
       </v-container>
     </v-main>

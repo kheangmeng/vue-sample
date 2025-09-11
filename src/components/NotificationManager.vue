@@ -1,11 +1,15 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { messaging } from '../firebase-config' // Your Firebase messaging instance
+import { messaging } from '../firebase-config'
 import { getToken, onMessage } from 'firebase/messaging'
+import { handleUpdateToken } from '@/api/http/notification/fetchApi'
 
 const fcmToken = ref('')
 const notificationMessage = ref('')
 const isSubscribed = ref(false)
+
+const profile = localStorage.getItem('profile')
+const userId = profile && JSON.parse(profile).id
 
 const BASE_PATH = import.meta.env.BASE_URL
 const VAPID_KEY =
@@ -62,22 +66,9 @@ const getAndSendToken = async () => {
       fcmToken.value = currentToken
       isSubscribed.value = true
 
-      // TODO: Send this token to your backend API
-      // Example using fetch (replace with your actual backend endpoint and user ID)
-      const userId = 5 // Replace with the actual user ID from your auth system
-      await fetch(`${import.meta.env.VITE_BASE_API}/api/notifications/save-fcm-token`, {
-        // Replace with your backend URL
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer YOUR_AUTH_TOKEN`, // If your backend requires authentication
-        },
-        body: JSON.stringify({
-          id: userId,
-          token: currentToken,
-          platform: 'web', // or 'web-chrome', 'web-firefox', etc.
-        }),
-      })
+      // // TODO: Send this token to your backend API
+      // // Example using fetch (replace with your actual backend endpoint and user ID)
+      await handleUpdateToken({ id: userId, token: currentToken, platform: 'web' })
       console.log('FCM token sent to backend successfully.')
     } else {
       console.warn('No registration token available. Request permission to generate one.')

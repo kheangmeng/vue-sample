@@ -3,7 +3,7 @@ import { useRouter } from 'vue-router'
 import { defineStore } from 'pinia'
 import { useAuthStore } from '@/stores/auth'
 import { handleLogin as handleLoginFake, mapResponse } from '@/api/fake/authApi'
-import { handleLogin } from '@/api/http/authApi'
+import { handleLogin } from '@/api/http/auth/fetchApi'
 import type { Login, LoginResponse } from '@/types'
 
 export const useLoginStore = defineStore('login', () => {

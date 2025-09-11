@@ -1,7 +1,7 @@
 import { ref, reactive } from 'vue'
 import { defineStore } from 'pinia'
-import { getPayments, handlePayment } from '@/api/http/paymentApi'
-import { handleRefreshToken } from '@/api/http/authApi'
+import { getPayments, handlePayment } from '@/api/http/payment/fetchApi'
+import { handleRefreshToken } from '@/api/http/auth/fetchApi'
 import { useAuthStore } from '@/stores/auth'
 import type { Payment, PaymentResponse, Pagination } from '@/types'
 

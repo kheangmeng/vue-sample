@@ -16,3 +16,18 @@ export interface UserResponse {
   email: string
   documents: string[]
 }
+
+export interface Subscribe {
+  user_id: number
+  topic: string
+}
+export interface Unsubscribe {
+  user_id: number
+  topic: string
+}
+
+export interface UserDeviceInfo {
+  id: number
+  token: string
+  platform: string
+}

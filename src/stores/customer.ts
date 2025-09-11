@@ -1,7 +1,7 @@
 import { ref, reactive } from 'vue'
 import { defineStore } from 'pinia'
-import { getCustomers } from '@/api/http/customerApi'
-import { handleRefreshToken } from '@/api/http/authApi'
+import { getCustomers } from '@/api/http/customer/fetchApi'
+import { handleRefreshToken } from '@/api/http/auth/fetchApi'
 import { useAuthStore } from '@/stores/auth'
 import type { Customer, CustomerResponse, Pagination } from '@/types'
 

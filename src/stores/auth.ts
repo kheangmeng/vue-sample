@@ -1,4 +1,4 @@
-import { reactive } from 'vue'
+import { reactive, computed } from 'vue'
 import { defineStore } from 'pinia'
 
 export const useAuthStore = defineStore('auth', () => {
@@ -13,5 +13,7 @@ export const useAuthStore = defineStore('auth', () => {
     auth.retryToken = value
   }
 
-  return { auth, setAuthenticated, setRetryToken }
+  const hasAuthenticated = computed(() => auth.hasAuthenticated || localStorage.getItem('token'))
+
+  return { auth, hasAuthenticated, setAuthenticated, setRetryToken }
 })

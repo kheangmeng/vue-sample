@@ -1,3 +1,4 @@
+import { mapLoginResponse } from './mapping'
 import type { Login, LoginResponse, Signup, RefreshTokenResponse } from '@/types'
 
 const BASE_API = import.meta.env.VITE_BASE_API
@@ -12,8 +13,7 @@ export async function handleLogin(credentials: Login): Promise<LoginResponse> {
   })
   const data = await res.json()
   if (res.ok) {
-    const { token, refreshToken, profile } = data.data
-    return { token, refreshToken, profile }
+    return mapLoginResponse(data)
   } else {
     throw new Error(data.message)
   }
