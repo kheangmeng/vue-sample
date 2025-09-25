@@ -1,6 +1,7 @@
 import GuestLayout from '@/layouts/GuestLayout.vue'
 import HomePage from '@/pages/HomePage.vue'
 import AboutPage from '@/pages/AboutPage.vue'
+import ServerEventPage from '@/pages/ServerEventPage.vue'
 import WebsocketPage from '@/pages/WebsocketPage.vue'
 import WebSocketIoPage from '@/pages/WebSocketIoPage.vue'
 import LoginPage from '@/pages/LoginPage.vue'
@@ -25,6 +26,11 @@ export default [
         path: '/about',
         name: 'about',
         component: AboutPage,
+      },
+      {
+        path: '/server-events',
+        name: 'server-events',
+        component: ServerEventPage,
       },
       {
         path: '/websocket',
