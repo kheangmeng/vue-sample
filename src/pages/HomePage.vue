@@ -20,6 +20,10 @@
               style="text-underline-offset: 3px; text-decoration: underline 3px rgb(97, 218, 251)"
               >React.js</span
             >
+            <span
+              style="text-underline-offset: 3px; text-decoration: underline 3px rgb(246, 55, 227)"
+              >Angular</span
+            >
             <span style="text-underline-offset: 3px; text-decoration: underline 3px rgb(0 221 130)"
               >Nuxt.js</span
             >
@@ -51,7 +55,7 @@
     <v-row style="max-width: 800px">
       <v-col cols="12">
         <div>
-          Usually I build system admin with Vue.js and React. I use Quasar, Vuetify, Element-plus
+          Usually I build web application with Vue and React. I use Quasar, Vuetify, Element-plus
           and Ant Design as my UI frameworks. I often solve problem around form logic and validation
           to meet the business requirement.
         </div>

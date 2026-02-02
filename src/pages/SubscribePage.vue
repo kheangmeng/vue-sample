@@ -50,19 +50,22 @@ async function unsubscribeFromTopic(topic: string) {
 
 <template>
   <div>
-    <h1>This is an Subscribe page</h1>
-    <ul class="d-flex flex-column ga-5">
+    <h2 class="mb-6">This is an Subscribe page</h2>
+    <ul class="d-flex flex-column ga-5" style="list-style-type: none; padding: 0">
       <li v-for="(value, key) in notificationTopics" :key="key">
         <div class="d-flex ga-2 align-center">
-          {{ value.toUpperCase() }}
+          {{ value.toUpperCase() }}:
           <v-btn
             v-if="!userTopics.includes(value)"
             color="primary"
+            size="small"
             @click="subscribeToTopic(value)"
           >
             Subscribe
           </v-btn>
-          <v-btn v-else color="error" @click="unsubscribeFromTopic(value)">Unsubscribe</v-btn>
+          <v-btn v-else color="error" size="small" @click="unsubscribeFromTopic(value)"
+            >Unsubscribe</v-btn
+          >
         </div>
       </li>
     </ul>

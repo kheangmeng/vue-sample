@@ -61,18 +61,25 @@ const drawer = ref(false)
           to="/customers"
         ></v-list-item>
         <v-list-item
-          prepend-icon="mdi-currency-usd"
-          title="Payment"
-          link
-          to="/payments"
-        ></v-list-item>
-        <v-list-item
           prepend-icon="mdi-account-multiple-plus"
           title="Subscribes"
           link
           to="/subscribes"
         ></v-list-item>
-        <v-list-item prepend-icon="mdi-chat-outline" title="Chat" link to="/chats"></v-list-item>
+        <v-list-item
+          prepend-icon="mdi-currency-usd"
+          title="Payment"
+          link
+          to="/payments"
+          disabled
+        ></v-list-item>
+        <v-list-item
+          prepend-icon="mdi-chat-outline"
+          title="Chat"
+          link
+          disabled
+          to="/chats"
+        ></v-list-item>
         <v-list-item prepend-icon="mdi-sale" title="Discount" link disabled></v-list-item>
         <v-list-item prepend-icon="mdi-percent" title="Promotion" link disabled></v-list-item>
         <v-list-item prepend-icon="mdi-shape" title="Category" link disabled></v-list-item>
@@ -88,9 +95,9 @@ const drawer = ref(false)
     </v-navigation-drawer>
 
     <v-main class="d-flex align-center justify-center">
-      <v-container style="min-height: 500px">
-        <NotificationManager />
-        <br />
+      <v-container style="min-height: 85.5vh">
+        <!-- <NotificationManager />
+        <br /> -->
         <router-view />
       </v-container>
     </v-main>

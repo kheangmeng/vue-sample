@@ -1,4 +1,4 @@
-import type { Category } from './index'
+import type { Category, CategoryResponse } from './index'
 
 export interface Product {
   name: string
@@ -21,17 +21,17 @@ export interface Product {
 }
 
 export interface ProductList {
-  // id: number
+  id: number
   name: string
   description?: string
-  // category: Category
+  category: CategoryResponse
   brand?: string
   supplierId?: number
-  // tags?: string[]
+  tags?: string[]
   isActive: boolean
   isSellable: boolean
   imageUrl?: string
-  // taxExempt: boolean
+  taxExempt: boolean
   basePrice?: number
   sku?: string
   barcode?: string
@@ -45,7 +45,7 @@ export interface ProductResponse {
   id: number
   name: string
   description?: string
-  category: Category
+  category: CategoryResponse
   brand?: string
   supplierId?: number
   tags?: string[]

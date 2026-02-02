@@ -1,6 +1,7 @@
 import DashboardLayout from '@/layouts/DashboardLayout.vue'
 import CreatePage from '@/pages/products/CreatePage.vue'
 import EditPage from '@/pages/products/EditPage.vue'
+import ViewPage from '@/pages/products/ViewPage.vue'
 import ListPage from '@/pages/products/ListPage.vue'
 import ListPageCustomer from '@/pages/customers/ListPage.vue'
 import ListPagePayment from '@/pages/payments/ListPage.vue'
@@ -27,7 +28,12 @@ export default [
         component: CreatePage,
       },
       {
-        path: 'edit/:id',
+        path: ':id',
+        name: 'view-product',
+        component: ViewPage,
+      },
+      {
+        path: ':id/edit',
         name: 'edit-product',
         component: EditPage,
       },

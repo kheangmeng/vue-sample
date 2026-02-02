@@ -1,5 +1,5 @@
+import { faker } from '@faker-js/faker'
 import type { Category, CategoryResponse, Pagination } from '@/types'
-import dummyData from '@/assets/dummy-data.json'
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
 
@@ -9,7 +9,7 @@ export async function handleFetchCategories(
   await delay(1000)
   console.log('pagination:', pagination)
   return {
-    categories: dummyData.categories,
+    categories: generateFakeCategory(10),
     message: 'Categories fetched successfully',
   }
 }
@@ -33,4 +33,24 @@ export async function handleCreateCategory(
     }
   }
   throw new Error('Something went wrong.')
+}
+
+export function generateFakeCategory(rows: number) {
+  const categories = []
+  for (let i = 0; i < rows; i++) {
+    categories.push(createFakeCategory())
+  }
+  return categories
+}
+
+function createFakeCategory() {
+  return {
+    id: faker.number.int({ min: 1, max: 5 }),
+    name: faker.commerce.productName(),
+    description: faker.commerce.productDescription(),
+    // parentCategoryId: faker.number.int(),
+    isActive: faker.datatype.boolean(),
+    createdAt: faker.date.past().toISOString(),
+    updatedAt: faker.date.past().toISOString(),
+  }
 }

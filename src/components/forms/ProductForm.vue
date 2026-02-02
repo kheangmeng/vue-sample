@@ -1,14 +1,20 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useProductStore } from '@/stores/product'
 import { useCategoriesStore } from '@/stores/category'
 import CategoryForm from './CategoryForm.vue'
-import type { Category } from '@/types'
+import type { Category, ProductResponse } from '@/types'
 
+interface Props {
+  productData?: ProductResponse
+}
+const props = defineProps<Props>()
 const router = useRouter()
 const categoryStore = useCategoriesStore()
 const store = useProductStore()
+const snackbar = ref(false)
+const snackbarMessage = ref('')
 const tags = [
   'Electronics',
   'Clothing',
@@ -18,11 +24,32 @@ const tags = [
   'Sports & Outdoors',
 ]
 
+watch(
+  () => props.productData,
+  (newVal) => {
+    if (newVal) {
+      handleFetchCategories()
+      store.setProduct(newVal)
+    }
+  },
+  { immediate: true },
+)
+onUnmounted(() => {
+  store.resetProduct()
+})
 async function onSubmit(): Promise<void> {
   if (!store.valid) return
-  await store.handleSubmit()
-  if (store.status === 'finished') {
-    router.push('/products')
+  try {
+    snackbarMessage.value = 'Product saved successfully!'
+    snackbar.value = true
+    await store.handleSubmit()
+    if (store.status === 'finished') {
+      if (store.loading === false) {
+        router.push('/products')
+      }
+    }
+  } catch (error) {
+    console.error('Error submitting the form:', error)
   }
 }
 function required(v: string): string | boolean {
@@ -60,6 +87,9 @@ async function singleUploadFile(file: File): Promise<string> {
   try {
     const response = await fetch(`${import.meta.env.VITE_BASE_API}/api/uploads/single`, {
       method: 'POST',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
       body: formData,
     })
     const data = await response.json()
@@ -77,6 +107,9 @@ async function multipleUploadFile(files: File[]): Promise<string> {
   try {
     const response = await fetch(`${import.meta.env.VITE_BASE_API}/api/uploads/multiple`, {
       method: 'POST',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
       body: formData,
     })
     const data = await response.json()
@@ -107,7 +140,7 @@ async function multipleUploadFile(files: File[]): Promise<string> {
               :readonly="store.loading"
               :rules="[required]"
               class="mb-2"
-              label="Product Name"
+              label="Product Name*"
               clearable
               variant="outlined"
               density="compact"
@@ -120,10 +153,12 @@ async function multipleUploadFile(files: File[]): Promise<string> {
               @update:focused="handleFetchCategories"
               item-title="name"
               item-value="id"
+              clearable
+              :rules="[required]"
               :item-props="itemProps"
               :loading="categoryStore.loading"
               :items="categoryStore.data"
-              label="Category"
+              label="Category*"
               variant="outlined"
               density="compact"
             >
@@ -131,7 +166,7 @@ async function multipleUploadFile(files: File[]): Promise<string> {
                 <v-btn
                   icon="mdi-plus"
                   :disabled="categoryStore.loading"
-                  size="md"
+                  color="primary"
                   density="compact"
                   @click="popupCategory = true"
                 >
@@ -165,8 +200,9 @@ async function multipleUploadFile(files: File[]): Promise<string> {
           <v-col cols="12" sm="6">
             <v-text-field
               v-model="store.product.basePrice"
-              label="Base Price"
+              label="Base Price*"
               prefix="$"
+              :rules="[required]"
               variant="outlined"
               density="compact"
             ></v-text-field>
@@ -179,6 +215,7 @@ async function multipleUploadFile(files: File[]): Promise<string> {
               label="Tags"
               chips
               multiple
+              clearable
               variant="outlined"
               density="compact"
             ></v-combobox>
@@ -188,8 +225,9 @@ async function multipleUploadFile(files: File[]): Promise<string> {
             <v-number-input
               v-model="store.product.stockQuantity"
               control-variant="stacked"
-              label="Stock Quantity"
+              label="Stock Quantity*"
               :min="0"
+              :rules="[required]"
               variant="outlined"
               density="compact"
             ></v-number-input>
@@ -199,8 +237,9 @@ async function multipleUploadFile(files: File[]): Promise<string> {
             <v-number-input
               v-model="store.product.lowStockThreshold"
               control-variant="stacked"
-              label="Low Stock Threshold"
+              label="Low Stock Threshold*"
               :min="0"
+              :rules="[required]"
               variant="outlined"
               density="compact"
             ></v-number-input>
@@ -208,7 +247,7 @@ async function multipleUploadFile(files: File[]): Promise<string> {
 
           <v-col cols="12">
             <v-textarea
-              label="Description"
+              label="Description*"
               v-model="store.product.description"
               :rules="[required]"
               name="input-7-1"
@@ -252,7 +291,8 @@ async function multipleUploadFile(files: File[]): Promise<string> {
           </v-col>
         </v-row>
       </v-container>
-      <div class="text-center">
+      <div class="d-flex ga-4 justify-end mt-4">
+        <v-btn size="large" type="button" variant="elevated"> Cancel </v-btn>
         <v-btn
           :disabled="!store.valid"
           :loading="store.loading"
@@ -272,4 +312,12 @@ async function multipleUploadFile(files: File[]): Promise<string> {
       <CategoryForm @submit="popupCategory = false" />
     </v-card>
   </v-dialog>
+
+  <v-snackbar v-model="snackbar" :timeout="2000">
+    {{ snackbarMessage }}
+
+    <template v-slot:actions>
+      <v-btn color="red" variant="text" @click="snackbar = false"> Close </v-btn>
+    </template>
+  </v-snackbar>
 </template>

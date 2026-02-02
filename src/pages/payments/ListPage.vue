@@ -40,17 +40,6 @@ onMounted(() => {
 
             Payments
           </v-toolbar-title>
-
-          <v-btn
-            class="me-2"
-            color="primary"
-            prepend-icon="mdi-plus"
-            rounded="lg"
-            text="Add a Customer"
-            border
-            disabled
-            @click="$router.push('/customers/create')"
-          ></v-btn>
         </v-toolbar>
       </template>
 

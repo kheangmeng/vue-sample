@@ -20,6 +20,6 @@ const items = [
       <v-icon icon="mdi-package-variant" size="small"></v-icon>
     </template>
   </v-breadcrumbs>
-  <h1 class="mb-3 ml-6 text-h5">Create Product</h1>
+  <h1 class="mb-6">Create Product</h1>
   <ProductForm />
 </template>

@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useProductsStore } from '@/stores/product'
 import { formatCurrency, formatDate } from '@/utilities/helper'
 
 const store = useProductsStore()
+const dialog = ref(false)
 const headers = [
   { title: 'Product Name', key: 'name', align: 'start', minWidth: '150px' },
   { title: 'Description', key: 'description', minWidth: '250px' },
@@ -21,6 +22,26 @@ const headers = [
 onMounted(() => {
   store.fetchProducts()
 })
+
+const snackbar = ref(false)
+const snackbarMessage = ref('')
+const deleteId = ref<number>()
+function handleDelete(id: number) {
+  deleteId.value = id
+  dialog.value = true
+}
+async function handleConformDelete() {
+  try {
+    // await store.handleDelete(deleteId.value)
+    store.fetchProducts()
+    dialog.value = false
+    snackbarMessage.value = 'Product deleted successfully!'
+    snackbar.value = true
+  } catch (error) {
+    console.error('Error deleting product:', error)
+  }
+  deleteId.value = 0
+}
 </script>
 <template>
   <v-sheet border rounded>
@@ -80,14 +101,48 @@ onMounted(() => {
       </template>
 
       <template v-slot:item.actions="{ item }">
-        <div class="d-flex ga-2 justify-end">
-          <v-icon color="medium-emphasis" icon="mdi-pencil" size="small"></v-icon>
+        <div class="d-flex justify-end">
+          <router-link :to="`/products/${item.id}`">
+            <v-btn size="small" color="blue-lighten-2" icon="mdi-eye" variant="text"></v-btn>
+            <!-- <v-icon color="medium-emphasis" icon="mdi-eye" size="small"></v-icon> -->
+          </router-link>
+          <router-link :to="`/products/${item.id}/edit`">
+            <v-btn size="small" color="orange-lighten-2" icon="mdi-pencil" variant="text"></v-btn>
+            <!-- <v-icon color="medium-emphasis" icon="mdi-pencil" size="small"></v-icon> -->
+          </router-link>
 
-          <v-icon color="medium-emphasis" icon="mdi-delete" size="small"></v-icon>
+          <v-btn
+            size="small"
+            color="red-lighten-2"
+            icon="mdi-delete"
+            variant="text"
+            @click="handleDelete(item.id)"
+          ></v-btn>
         </div>
       </template>
 
       <template v-slot:no-data> No data </template>
     </v-data-table>
   </v-sheet>
+
+  <v-dialog v-model="dialog" width="auto">
+    <v-card
+      max-width="400"
+      prepend-icon="mdi-delete"
+      title="Delete Product"
+      text="Are you sure you want to delete this product?"
+    >
+      <template v-slot:actions>
+        <v-btn class="ms-auto" text="Confirm" color="red" @click="handleConformDelete"></v-btn>
+      </template>
+    </v-card>
+  </v-dialog>
+
+  <v-snackbar v-model="snackbar" :timeout="2000">
+    {{ snackbarMessage }}
+
+    <template v-slot:actions>
+      <v-btn color="red" variant="text" @click="snackbar = false"> Close </v-btn>
+    </template>
+  </v-snackbar>
 </template>

@@ -1,7 +1,7 @@
 import { ref, reactive } from 'vue'
 import { defineStore } from 'pinia'
 import { handleCreateProduct, handleFetchProducts } from '@/api/fake/productApi'
-import type { Product, ProductList, CreateResponse, Pagination } from '@/types'
+import type { Product, ProductResponse, ProductList, CreateResponse, Pagination } from '@/types'
 
 export const useProductStore = defineStore('product', () => {
   const product = reactive<Product>({
@@ -29,13 +29,51 @@ export const useProductStore = defineStore('product', () => {
   const loading = ref(false)
   const error = ref()
 
+  function setProduct(productData: ProductResponse): void {
+    product.name = productData.name
+    product.description = productData.description
+    product.categoryId = productData.category.id
+    product.brand = productData.brand
+    product.supplierId = productData.supplierId
+    product.tags = productData.tags
+    product.isActive = productData.isActive
+    product.isSellable = productData.isSellable
+    product.createdAt = productData.createdAt
+    product.updatedAt = productData.updatedAt
+    product.imageUrl = productData.imageUrl
+    product.taxExempt = productData.taxExempt
+    product.basePrice = productData.basePrice
+    product.sku = productData.sku
+    product.barcode = productData.barcode
+    product.stockQuantity = productData.stockQuantity
+    product.lowStockThreshold = productData.lowStockThreshold
+  }
+
+  function resetProduct(): void {
+    product.name = ''
+    product.description = ''
+    product.categoryId = null
+    product.brand = ''
+    product.supplierId = undefined
+    product.tags = []
+    product.isActive = true
+    product.isSellable = true
+    product.imageUrl = ''
+    product.taxExempt = false
+    product.basePrice = undefined
+    product.sku = ''
+    product.barcode = ''
+    product.stockQuantity = undefined
+    product.lowStockThreshold = undefined
+  }
+
   async function handleSubmit(): Promise<void> {
     try {
       status.value = 'submitting'
       loading.value = true
       const res = await handleCreateProduct(product)
       data.value = res
-    } catch (error: unknown) {
+    } catch (error: any) {
       error.value = error
     } finally {
       status.value = 'finished'
@@ -43,7 +81,7 @@ export const useProductStore = defineStore('product', () => {
     }
   }
 
-  return { product, data, valid, loading, status, error, handleSubmit }
+  return { product, data, valid, loading, status, error, handleSubmit, setProduct, resetProduct }
 })
 
 export const useProductsStore = defineStore('products', () => {
@@ -60,7 +98,7 @@ export const useProductsStore = defineStore('products', () => {
       loading.value = true
       const res = await handleFetchProducts(pagination.value)
       data.value = res.products
-    } catch (error: unknown) {
+    } catch (error: any) {
       error.value = error
     } finally {
       loading.value = false
