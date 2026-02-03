@@ -6,7 +6,7 @@ const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
 export async function handleFetchProducts(
   pagination: Pagination,
 ): Promise<{ products: ProductList[]; message: string }> {
-  await delay(1000)
+  await delay(300)
   console.log('pagination:', pagination)
   return {
     products: generateFakeProduct(pagination.limit),
@@ -17,7 +17,7 @@ export async function handleFetchProducts(
 export async function handleFetchProductById(
   id: number,
 ): Promise<{ product: ProductResponse; message: string }> {
-  await delay(1000)
+  await delay(300)
   console.log('id:', id)
   return {
     product: generateFakeProduct(1)[0],
@@ -26,7 +26,7 @@ export async function handleFetchProductById(
 }
 
 export async function handleCreateProduct(product: Product): Promise<CreateResponse> {
-  await delay(1000)
+  await delay(300)
   if (product.name && product.categoryId) {
     return {
       message: 'Product created successfully',

@@ -21,10 +21,18 @@ const items = [
 const route = useRoute()
 const productId = Number(route.params.id)
 const productData = ref<ProductResponse>()
+const loading = ref(false)
 onMounted(async () => {
-  const res = await handleFetchProductById(productId)
-  if (res) {
-    productData.value = res.product
+  loading.value = true
+  try {
+    const res = await handleFetchProductById(productId)
+    if (res) {
+      productData.value = res.product
+    }
+  } catch (error) {
+    console.error('Error fetching product:', error)
+  } finally {
+    loading.value = false
   }
 })
 </script>
@@ -35,5 +43,5 @@ onMounted(async () => {
     </template>
   </v-breadcrumbs>
   <h1 class="mb-6">Update Product</h1>
-  <ProductForm :productData="productData" />
+  <ProductForm :productData="productData" :loading="loading" />
 </template>

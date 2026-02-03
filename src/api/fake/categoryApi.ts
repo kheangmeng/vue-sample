@@ -6,7 +6,7 @@ const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
 export async function handleFetchCategories(
   pagination: Pagination,
 ): Promise<{ categories: CategoryResponse[]; message: string }> {
-  await delay(1000)
+  await delay(300)
   console.log('pagination:', pagination)
   return {
     categories: generateFakeCategory(10),
@@ -17,7 +17,7 @@ export async function handleFetchCategories(
 export async function handleCreateCategory(
   category: Category,
 ): Promise<{ category: CategoryResponse; message: string }> {
-  await delay(1000)
+  await delay(300)
   if (category.name) {
     return {
       category: {

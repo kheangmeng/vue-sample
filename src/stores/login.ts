@@ -10,7 +10,7 @@ export const useLoginStore = defineStore('login', () => {
   const router = useRouter()
   const login = reactive<Login>({
     email: 'superstaff@gmail.com',
-    password: 'Password@',
+    password: 'secret@123',
   })
   const authStore = useAuthStore()
   const status = ref<'idle' | 'submitting' | 'finished'>('idle')
@@ -23,12 +23,14 @@ export const useLoginStore = defineStore('login', () => {
     try {
       status.value = 'submitting'
       loading.value = true
-      if (import.meta.env.VITE_ENV === 'development') {
-        data.value = await handleLogin(login)
-      } else {
-        const res = await handleLoginFake(login)
-        data.value = mapResponse(res)
-      }
+      const res = await handleLoginFake(login)
+      data.value = mapResponse(res)
+      // if (import.meta.env.VITE_ENV === 'development') {
+      //   data.value = await handleLogin(login)
+      // } else {
+      //   const res = await handleLoginFake(login)
+      //   data.value = mapResponse(res)
+      // }
       localStorage.setItem('token', data.value.token)
       localStorage.setItem('refreshToken', data.value.refreshToken)
       localStorage.setItem('profile', JSON.stringify(data.value.profile))

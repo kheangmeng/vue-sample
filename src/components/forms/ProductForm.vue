@@ -8,6 +8,9 @@ import type { Category, ProductResponse } from '@/types'
 
 interface Props {
   productData?: ProductResponse
+  disableFields?: string[]
+  readonly?: boolean
+  loading?: boolean
 }
 const props = defineProps<Props>()
 const router = useRouter()
@@ -137,13 +140,13 @@ async function multipleUploadFile(files: File[]): Promise<string> {
           <v-col cols="12" sm="6">
             <v-text-field
               v-model="store.product.name"
-              :readonly="store.loading"
               :rules="[required]"
               class="mb-2"
               label="Product Name*"
-              clearable
               variant="outlined"
               density="compact"
+              :disabled="props.disableFields?.includes('name')"
+              :readonly="readonly"
             ></v-text-field>
           </v-col>
 
@@ -153,7 +156,7 @@ async function multipleUploadFile(files: File[]): Promise<string> {
               @update:focused="handleFetchCategories"
               item-title="name"
               item-value="id"
-              clearable
+              :clearable="!readonly && !props.disableFields?.includes('category')"
               :rules="[required]"
               :item-props="itemProps"
               :loading="categoryStore.loading"
@@ -161,14 +164,18 @@ async function multipleUploadFile(files: File[]): Promise<string> {
               label="Category*"
               variant="outlined"
               density="compact"
+              :disabled="props.disableFields?.includes('category')"
+              :readonly="readonly"
             >
               <template #append>
                 <v-btn
+                  v-if="!props.readonly"
                   icon="mdi-plus"
-                  :disabled="categoryStore.loading"
                   color="primary"
                   density="compact"
                   @click="popupCategory = true"
+                  :loading="categoryStore.loading"
+                  :disabled="categoryStore.loading || props.disableFields?.includes('category')"
                 >
                 </v-btn>
               </template>
@@ -178,22 +185,22 @@ async function multipleUploadFile(files: File[]): Promise<string> {
           <v-col cols="12" sm="6">
             <v-text-field
               v-model="store.product.brand"
-              :readonly="store.loading"
               label="Brand"
-              clearable
               variant="outlined"
               density="compact"
+              :disabled="props.disableFields?.includes('brand')"
+              :readonly="readonly"
             ></v-text-field>
           </v-col>
 
           <v-col cols="12" sm="6">
             <v-text-field
               v-model="store.product.sku"
-              :readonly="store.loading"
               label="SKU"
-              clearable
               variant="outlined"
               density="compact"
+              :disabled="props.disableFields?.includes('sku')"
+              :readonly="readonly"
             ></v-text-field>
           </v-col>
 
@@ -205,6 +212,8 @@ async function multipleUploadFile(files: File[]): Promise<string> {
               :rules="[required]"
               variant="outlined"
               density="compact"
+              :disabled="props.disableFields?.includes('basePrice')"
+              :readonly="readonly"
             ></v-text-field>
           </v-col>
 
@@ -215,9 +224,11 @@ async function multipleUploadFile(files: File[]): Promise<string> {
               label="Tags"
               chips
               multiple
-              clearable
+              :clearable="!readonly && !props.disableFields?.includes('category')"
               variant="outlined"
               density="compact"
+              :disabled="props.disableFields?.includes('tags')"
+              :readonly="readonly"
             ></v-combobox>
           </v-col>
 
@@ -230,6 +241,8 @@ async function multipleUploadFile(files: File[]): Promise<string> {
               :rules="[required]"
               variant="outlined"
               density="compact"
+              :disabled="props.disableFields?.includes('stockQuantity')"
+              :readonly="readonly"
             ></v-number-input>
           </v-col>
 
@@ -242,6 +255,8 @@ async function multipleUploadFile(files: File[]): Promise<string> {
               :rules="[required]"
               variant="outlined"
               density="compact"
+              :disabled="props.disableFields?.includes('lowStockThreshold')"
+              :readonly="readonly"
             ></v-number-input>
           </v-col>
 
@@ -254,6 +269,8 @@ async function multipleUploadFile(files: File[]): Promise<string> {
               auto-grow
               variant="outlined"
               density="compact"
+              :disabled="props.disableFields?.includes('description')"
+              :readonly="readonly"
             ></v-textarea>
           </v-col>
 
@@ -263,18 +280,24 @@ async function multipleUploadFile(files: File[]): Promise<string> {
               :label="`${store.product.isActive ? 'Active' : 'Inactive'}`"
               hide-details
               color="primary"
+              :disabled="props.disableFields?.includes('isActive')"
+              :readonly="readonly"
             ></v-switch>
             <v-switch
               v-model="store.product.isSellable"
               :label="`${store.product.isSellable ? 'Sellable' : 'Not Sellable'}`"
               hide-details
               color="primary"
+              :disabled="props.disableFields?.includes('isSellable')"
+              :readonly="readonly"
             ></v-switch>
             <v-switch
               v-model="store.product.taxExempt"
               :label="`Tax exempt: ${store.product.taxExempt ? 'Yes' : 'No'}`"
               hide-details
               color="primary"
+              :disabled="props.disableFields?.includes('taxExempt')"
+              :readonly="readonly"
             ></v-switch>
           </v-col>
           <v-col cols="12">
@@ -286,14 +309,17 @@ async function multipleUploadFile(files: File[]): Promise<string> {
               prepend-icon="mdi-image"
               variant="outlined"
               density="compact"
+              :disabled="props.disableFields?.includes('image')"
+              :readonly="readonly"
             ></v-file-input>
             <v-img :width="300" aspect-ratio="16/9" cover :src="objUrl"></v-img>
           </v-col>
         </v-row>
       </v-container>
       <div class="d-flex ga-4 justify-end mt-4">
-        <v-btn size="large" type="button" variant="elevated"> Cancel </v-btn>
+        <v-btn size="large" type="button" variant="elevated" @click="router.go(-1)"> Cancel </v-btn>
         <v-btn
+          v-if="!props.readonly"
           :disabled="!store.valid"
           :loading="store.loading"
           color="primary"
@@ -306,6 +332,10 @@ async function multipleUploadFile(files: File[]): Promise<string> {
       </div>
     </v-form>
   </v-card>
+
+  <v-overlay :model-value="loading" class="align-center justify-center">
+    <v-progress-circular color="primary" size="64" indeterminate></v-progress-circular>
+  </v-overlay>
 
   <v-dialog v-model="popupCategory" max-width="500">
     <v-card prepend-icon="mdi-shape" title="Create Category" class="px-6 pb-6">

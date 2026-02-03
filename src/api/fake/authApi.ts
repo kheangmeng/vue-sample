@@ -10,8 +10,8 @@ const MOCK_TOKEN_RTK = 'mock-jwt-token-rtk-67890'
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
 
 export async function handleLogin(credentials: Login): Promise<{ user: AuthUser; token: string }> {
-  await delay(1000)
-  if (credentials.email === 'vue.sample@gmail.com' && credentials.password === 'secret123') {
+  await delay(300)
+  if (credentials.email === 'superstaff@gmail.com' && credentials.password === 'secret@123') {
     localStorage.setItem('authToken', MOCK_TOKEN_RTK)
     return { user: MOCK_USER_RTK, token: MOCK_TOKEN_RTK }
   }

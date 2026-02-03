@@ -10,7 +10,7 @@ const authStore = useAuthStore()
   <v-layout class="rounded rounded-md border">
     <v-app-bar>
       <v-app-bar-title @click="$router.push('/')" class="cursor-pointer">
-        <v-icon icon="mdi-volleyball" /> Vue Sample
+        <v-icon icon="mdi-volleyball" /> Prod Commerce
       </v-app-bar-title>
 
       <template v-if="authStore.hasAuthenticated">
@@ -77,7 +77,7 @@ const authStore = useAuthStore()
 
       <v-divider></v-divider>
 
-      <div>© {{ new Date().getFullYear() }} — <strong>Vue Sample</strong></div>
+      <div>© {{ new Date().getFullYear() }} — <strong>Prod Commerce</strong></div>
     </v-footer>
   </v-layout>
 </template>

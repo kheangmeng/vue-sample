@@ -22,7 +22,7 @@ const drawer = ref(false)
       <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-app-bar-title>
         <span class="cursor-pointer" @click="$router.push('/')">
-          <v-icon icon="mdi-volleyball" /> Vue Sample
+          <v-icon icon="mdi-volleyball" /> Prod Commerce
         </span>
       </v-app-bar-title>
 
@@ -103,7 +103,7 @@ const drawer = ref(false)
     </v-main>
 
     <v-footer app class="text-center d-flex flex-column ga-2 py-4">
-      <div>© {{ new Date().getFullYear() }} — <strong>Vue Sample</strong></div>
+      <div>© {{ new Date().getFullYear() }} — <strong>Prod Commerce</strong></div>
     </v-footer>
   </v-layout>
 </template>

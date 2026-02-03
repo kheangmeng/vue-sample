@@ -6,46 +6,39 @@
         <div class="">
           <div class="d-flex align-center">
             <div>
-              👋 Hello there! I’m
-              <strong>Kheangmeng</strong>, a frontend developer. I’ve been in this industry for over
-              8 years, and here’s what I use:
+              👋 Hello, I am Kheangmeng, a frontend developer with over eight years of experience in
+              the industry. My preferred development tools include:
             </div>
           </div>
           <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px">
             [<span
               style="text-underline-offset: 3px; text-decoration: underline 3px rgb(66, 184, 131)"
-              >Vue.js</span
+              >Vue.js,</span
             >
             <span
               style="text-underline-offset: 3px; text-decoration: underline 3px rgb(97, 218, 251)"
-              >React.js</span
+              >React.js,</span
             >
             <span
               style="text-underline-offset: 3px; text-decoration: underline 3px rgb(246, 55, 227)"
-              >Angular</span
+              >Angular,</span
+            >
+            <span style="text-underline-offset: 3px; text-decoration: underline 3px rgb(44 104 44)"
+              >Node.js,</span
             >
             <span style="text-underline-offset: 3px; text-decoration: underline 3px rgb(0 221 130)"
-              >Nuxt.js</span
+              >Nuxt.js,</span
+            >
+            <span style="text-underline-offset: 3px; text-decoration: underline 3px rgb(0 0 0)"
+              >Next.js,</span
             >
             <span
               style="text-underline-offset: 3px; text-decoration: underline 3px rgb(49, 120, 198)"
-              >TypeScript</span
+              >TypeScript,</span
             >
             <span
               style="text-underline-offset: 3px; text-decoration: underline 3px rgb(56, 189, 249)"
               >Tailwind CSS</span
-            >
-            <span style="text-underline-offset: 3px; text-decoration: underline 3px rgb(28 102 192)"
-              >Vuetify</span
-            >
-            <span style="text-underline-offset: 3px; text-decoration: underline 3px rgb(9 180 255)"
-              >Quasar</span
-            >
-            <span style="text-underline-offset: 3px; text-decoration: underline 3px rgb(62 159 255)"
-              >Element-plus</span
-            >
-            <span style="text-underline-offset: 3px; text-decoration: underline 3px rgb(14 123 255)"
-              >Ant Design</span
             >]
           </div>
         </div>
@@ -55,9 +48,10 @@
     <v-row style="max-width: 800px">
       <v-col cols="12">
         <div>
-          Usually I build web application with Vue and React. I use Quasar, Vuetify, Element-plus
-          and Ant Design as my UI frameworks. I often solve problem around form logic and validation
-          to meet the business requirement.
+          Typically, I develop web applications utilizing Vuetify, Element-Plus, Shadcn, Quasar,
+          Angular Material, and Ant Design as my UI frameworks. My primary focus lies in addressing
+          challenges related to form logic, validation to align with business requirements, and
+          responsive design that adapts seamlessly from mobile devices to desktop platforms.
         </div>
       </v-col>
     </v-row>

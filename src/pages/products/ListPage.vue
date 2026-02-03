@@ -44,86 +44,91 @@ async function handleConformDelete() {
 }
 </script>
 <template>
-  <v-sheet border rounded>
-    <v-data-table
-      :headers="headers"
-      :hide-default-footer="store.data.length < 11"
-      :items="store.data"
-      :loading="store.loading"
-    >
-      <template v-slot:top>
-        <v-toolbar flat>
-          <v-toolbar-title>
-            <v-icon
-              color="medium-emphasis"
-              icon="mdi-package-variant"
-              size="x-small"
-              start
-            ></v-icon>
+  <v-row align="start" justify="space-between" class="my-6 mx-3">
+    <h1>Products</h1>
+    <v-btn
+      color="primary"
+      prepend-icon="mdi-plus"
+      rounded="lg"
+      text="Add a Product"
+      border
+      @click="$router.push('/products/create')"
+    ></v-btn>
+  </v-row>
+  <v-data-table
+    border
+    :headers="headers"
+    :items="store.data"
+    :loading="store.loading"
+    :items-length="120"
+  >
+    <!-- <template v-slot:top>
+      <v-toolbar flat>
+        <v-toolbar-title>
+          <v-icon color="medium-emphasis" icon="mdi-package-variant" size="x-small" start></v-icon>
 
-            Products
-          </v-toolbar-title>
+          Products
+        </v-toolbar-title>
 
-          <v-btn
-            class="me-2"
-            color="primary"
-            prepend-icon="mdi-plus"
-            rounded="lg"
-            text="Add a Product"
-            border
-            @click="$router.push('/products/create')"
-          ></v-btn>
-        </v-toolbar>
-      </template>
+        <v-btn
+          class="me-2"
+          color="primary"
+          prepend-icon="mdi-plus"
+          rounded="lg"
+          text="Add a Product"
+          border
+          @click="$router.push('/products/create')"
+        ></v-btn>
+      </v-toolbar>
+    </template> -->
 
-      <template v-slot:item.title="{ value }">
-        <v-chip :text="value" border="thin opacity-25" prepend-icon="mdi-book" label>
-          <template v-slot:prepend>
-            <v-icon color="medium-emphasis"></v-icon>
-          </template>
-        </v-chip>
-      </template>
+    <template v-slot:item.title="{ value }">
+      <v-chip :text="value" border="thin opacity-25" prepend-icon="mdi-book" label>
+        <template v-slot:prepend>
+          <v-icon color="medium-emphasis"></v-icon>
+        </template>
+      </v-chip>
+    </template>
 
-      <template v-slot:item.basePrice="{ value }">
-        <div>{{ formatCurrency(value) }}</div>
-      </template>
+    <template v-slot:item.basePrice="{ value }">
+      <div>{{ formatCurrency(value) }}</div>
+    </template>
 
-      <template v-slot:item.isSellable="{ value }">
-        <div>{{ value ? 'Yes' : 'No' }}</div>
-      </template>
+    <template v-slot:item.isSellable="{ value }">
+      <div>{{ value ? 'Yes' : 'No' }}</div>
+    </template>
 
-      <template v-slot:item.createdAt="{ value }">
-        <div>{{ formatDate(value) }}</div>
-      </template>
+    <template v-slot:item.createdAt="{ value }">
+      <div>{{ formatDate(value) }}</div>
+    </template>
 
-      <template v-slot:item.updatedAt="{ value }">
-        <div>{{ formatDate(value) }}</div>
-      </template>
+    <template v-slot:item.updatedAt="{ value }">
+      <div>{{ formatDate(value) }}</div>
+    </template>
 
-      <template v-slot:item.actions="{ item }">
-        <div class="d-flex justify-end">
-          <router-link :to="`/products/${item.id}`">
-            <v-btn size="small" color="blue-lighten-2" icon="mdi-eye" variant="text"></v-btn>
-            <!-- <v-icon color="medium-emphasis" icon="mdi-eye" size="small"></v-icon> -->
-          </router-link>
-          <router-link :to="`/products/${item.id}/edit`">
-            <v-btn size="small" color="orange-lighten-2" icon="mdi-pencil" variant="text"></v-btn>
-            <!-- <v-icon color="medium-emphasis" icon="mdi-pencil" size="small"></v-icon> -->
-          </router-link>
+    <template v-slot:item.actions="{ item }">
+      <div class="d-flex justify-end">
+        <router-link :to="`/products/${item.id}`">
+          <v-btn size="small" color="blue-lighten-2" icon="mdi-eye" variant="text"></v-btn>
+          <!-- <v-icon color="medium-emphasis" icon="mdi-eye" size="small"></v-icon> -->
+        </router-link>
+        <router-link :to="`/products/${item.id}/edit`">
+          <v-btn size="small" color="orange-lighten-2" icon="mdi-pencil" variant="text"></v-btn>
+          <!-- <v-icon color="medium-emphasis" icon="mdi-pencil" size="small"></v-icon> -->
+        </router-link>
 
-          <v-btn
-            size="small"
-            color="red-lighten-2"
-            icon="mdi-delete"
-            variant="text"
-            @click="handleDelete(item.id)"
-          ></v-btn>
-        </div>
-      </template>
+        <v-btn
+          size="small"
+          color="red-lighten-2"
+          icon="mdi-delete"
+          variant="text"
+          @click="handleDelete(item.id)"
+        ></v-btn>
+      </div>
+    </template>
 
-      <template v-slot:no-data> No data </template>
-    </v-data-table>
-  </v-sheet>
+    <template v-slot:no-data> No data </template>
+  </v-data-table>
 
   <v-dialog v-model="dialog" width="auto">
     <v-card
@@ -133,7 +138,16 @@ async function handleConformDelete() {
       text="Are you sure you want to delete this product?"
     >
       <template v-slot:actions>
-        <v-btn class="ms-auto" text="Confirm" color="red" @click="handleConformDelete"></v-btn>
+        <div>
+          <v-btn class="mr-3" variant="outlined" text="Cancel" @click="dialog = false"></v-btn>
+          <v-btn
+            variant="outlined"
+            class="ms-auto"
+            text="Confirm"
+            color="red"
+            @click="handleConformDelete"
+          ></v-btn>
+        </div>
       </template>
     </v-card>
   </v-dialog>
