@@ -59,12 +59,14 @@ const drawer = ref(false)
           title="Customer"
           link
           to="/customers"
+          disabled
         ></v-list-item>
         <v-list-item
           prepend-icon="mdi-account-multiple-plus"
           title="Subscribes"
           link
           to="/subscribes"
+          disabled
         ></v-list-item>
         <v-list-item
           prepend-icon="mdi-currency-usd"

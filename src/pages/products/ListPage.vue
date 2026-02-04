@@ -55,14 +55,15 @@ async function handleConformDelete() {
       @click="$router.push('/products/create')"
     ></v-btn>
   </v-row>
-  <v-data-table
-    border
-    :headers="headers"
-    :items="store.data"
-    :loading="store.loading"
-    :items-length="120"
-  >
-    <!-- <template v-slot:top>
+  <v-card class="my-auto mx-auto pa-2" elevation="8" rounded="lg">
+    <v-data-table
+      border
+      :headers="headers"
+      :items="store.data"
+      :loading="store.loading"
+      :items-length="120"
+    >
+      <!-- <template v-slot:top>
       <v-toolbar flat>
         <v-toolbar-title>
           <v-icon color="medium-emphasis" icon="mdi-package-variant" size="x-small" start></v-icon>
@@ -82,53 +83,54 @@ async function handleConformDelete() {
       </v-toolbar>
     </template> -->
 
-    <template v-slot:item.title="{ value }">
-      <v-chip :text="value" border="thin opacity-25" prepend-icon="mdi-book" label>
-        <template v-slot:prepend>
-          <v-icon color="medium-emphasis"></v-icon>
-        </template>
-      </v-chip>
-    </template>
+      <template v-slot:item.title="{ value }">
+        <v-chip :text="value" border="thin opacity-25" prepend-icon="mdi-book" label>
+          <template v-slot:prepend>
+            <v-icon color="medium-emphasis"></v-icon>
+          </template>
+        </v-chip>
+      </template>
 
-    <template v-slot:item.basePrice="{ value }">
-      <div>{{ formatCurrency(value) }}</div>
-    </template>
+      <template v-slot:item.basePrice="{ value }">
+        <div>{{ formatCurrency(value) }}</div>
+      </template>
 
-    <template v-slot:item.isSellable="{ value }">
-      <div>{{ value ? 'Yes' : 'No' }}</div>
-    </template>
+      <template v-slot:item.isSellable="{ value }">
+        <div>{{ value ? 'Yes' : 'No' }}</div>
+      </template>
 
-    <template v-slot:item.createdAt="{ value }">
-      <div>{{ formatDate(value) }}</div>
-    </template>
+      <template v-slot:item.createdAt="{ value }">
+        <div>{{ formatDate(value) }}</div>
+      </template>
 
-    <template v-slot:item.updatedAt="{ value }">
-      <div>{{ formatDate(value) }}</div>
-    </template>
+      <template v-slot:item.updatedAt="{ value }">
+        <div>{{ formatDate(value) }}</div>
+      </template>
 
-    <template v-slot:item.actions="{ item }">
-      <div class="d-flex justify-end">
-        <router-link :to="`/products/${item.id}`">
-          <v-btn size="small" color="blue-lighten-2" icon="mdi-eye" variant="text"></v-btn>
-          <!-- <v-icon color="medium-emphasis" icon="mdi-eye" size="small"></v-icon> -->
-        </router-link>
-        <router-link :to="`/products/${item.id}/edit`">
-          <v-btn size="small" color="orange-lighten-2" icon="mdi-pencil" variant="text"></v-btn>
-          <!-- <v-icon color="medium-emphasis" icon="mdi-pencil" size="small"></v-icon> -->
-        </router-link>
+      <template v-slot:item.actions="{ item }">
+        <div class="d-flex justify-end">
+          <router-link :to="`/products/${item.id}`">
+            <v-btn size="small" color="blue-lighten-2" icon="mdi-eye" variant="text"></v-btn>
+            <!-- <v-icon color="medium-emphasis" icon="mdi-eye" size="small"></v-icon> -->
+          </router-link>
+          <router-link :to="`/products/${item.id}/edit`">
+            <v-btn size="small" color="orange-lighten-2" icon="mdi-pencil" variant="text"></v-btn>
+            <!-- <v-icon color="medium-emphasis" icon="mdi-pencil" size="small"></v-icon> -->
+          </router-link>
 
-        <v-btn
-          size="small"
-          color="red-lighten-2"
-          icon="mdi-delete"
-          variant="text"
-          @click="handleDelete(item.id)"
-        ></v-btn>
-      </div>
-    </template>
+          <v-btn
+            size="small"
+            color="red-lighten-2"
+            icon="mdi-delete"
+            variant="text"
+            @click="handleDelete(item.id)"
+          ></v-btn>
+        </div>
+      </template>
 
-    <template v-slot:no-data> No data </template>
-  </v-data-table>
+      <template v-slot:no-data> No data </template>
+    </v-data-table>
+  </v-card>
 
   <v-dialog v-model="dialog" width="auto">
     <v-card
