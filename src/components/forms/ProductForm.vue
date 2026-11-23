@@ -4,6 +4,8 @@ import { useRouter } from 'vue-router'
 import { useProductStore } from '@/stores/product'
 import { useCategoriesStore } from '@/stores/category'
 import CategoryForm from './CategoryForm.vue'
+// import SingleUpload from '../SingleUpload.vue'
+// import MultipleUpload from '../MultipleUpload.vue'
 import type { Category, ProductResponse } from '@/types'
 
 interface Props {
@@ -129,6 +131,13 @@ async function multipleUploadFile(files: File[]): Promise<string> {
 //     reader.onerror = (error) => reject(error)
 //     reader.readAsDataURL(file)
 //   })
+// }
+
+// function handleSingleUpload(url: string): void {
+//   store.product.imageUrl = url
+// }
+// function handleMultiUpload(urls: string[]): void {
+//   console.log('handleMultiUpload', urls)
 // }
 </script>
 
@@ -301,6 +310,8 @@ async function multipleUploadFile(files: File[]): Promise<string> {
             ></v-switch>
           </v-col>
           <v-col cols="12">
+            <!-- <SingleUpload @update:model-value="handleSingleUpload" /> -->
+            <!-- <MultipleUpload @update:model-value="handleMultiUpload" /> -->
             <v-file-input
               :model-value="fileUploaded"
               @update:model-value="handleFileUpload"
