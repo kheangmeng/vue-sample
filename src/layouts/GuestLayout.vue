@@ -7,10 +7,10 @@ const route = useRoute()
 const authStore = useAuthStore()
 </script>
 <template>
-  <v-layout class="rounded rounded-md border">
-    <v-app-bar>
+  <v-layout class="rounded rounded-md">
+    <v-app-bar :elevation="0">
       <v-app-bar-title @click="$router.push('/')" class="cursor-pointer">
-        <v-icon icon="mdi-volleyball" /> Prod Commerce
+        <v-icon icon="mdi-volleyball" /> Pro Commerce
       </v-app-bar-title>
 
       <template v-if="authStore.hasAuthenticated">
@@ -18,7 +18,7 @@ const authStore = useAuthStore()
           append-icon="mdi-package-variant"
           color="primary"
           variant="tonal"
-          class="mr-2"
+          class="mr-5"
           @click="$router.push('/products')"
         >
           Products
@@ -77,7 +77,7 @@ const authStore = useAuthStore()
 
       <v-divider></v-divider>
 
-      <div>© {{ new Date().getFullYear() }} — <strong>Prod Commerce</strong></div>
+      <div>© {{ new Date().getFullYear() }} — <strong>Pro Commerce</strong></div>
     </v-footer>
   </v-layout>
 </template>

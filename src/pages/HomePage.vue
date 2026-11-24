@@ -139,14 +139,12 @@ import { motion } from 'motion-v'
   </div>
 </template>
 <style>
-@media (min-width: 1024px) {
-  .home {
-    font-size: 1.5em;
-    min-height: 65vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+.home {
+  font-size: 1.5em;
+  min-height: 65vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .skills {

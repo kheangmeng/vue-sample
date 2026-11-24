@@ -4,7 +4,7 @@ import LoginForm from '@/components/forms/LoginForm.vue'
 
 <template>
   <div class="mt-16">
-    <div class="text-center mb-6 text-h4"><v-icon icon="mdi-volleyball" /> Prod Commerce</div>
+    <div class="text-center mb-6 text-h4"><v-icon icon="mdi-volleyball" /> Pro Commerce</div>
     <LoginForm />
   </div>
 </template>
