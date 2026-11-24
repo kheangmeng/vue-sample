@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 // import NotificationManager from '../components/NotificationManager.vue'
@@ -14,6 +14,14 @@ function handleLogout(): void {
 }
 
 const drawer = ref(false)
+
+onMounted(() => {
+  if (window.innerWidth < 1024) {
+    drawer.value = false
+  } else {
+    drawer.value = true
+  }
+})
 </script>
 
 <template>
